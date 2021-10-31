@@ -9,35 +9,35 @@
 		<canvas src="canvas" id="mem"></canvas>
 	    <div>
 	    	<select v-model="type" v-on:change="typeChange">
-	    		<option v-for="type in types" :value="type" >[[type]]</option>
+	    		<option v-for="type in types" :value="type" >{{type}}</option>
 	    	</select>
-	    	<h3>Тексты</h3>
+	    	<h3>РўРµРєСЃС‚С‹</h3>
 	    	<div v-for="text,i in texts">
-	    		<h4>Текст [[i+1]]</h4>
+	    		<h4>РўРµРєСЃС‚ {{i+1}}</h4>
 	    		<div class="textPar">
-	    			текст:<textarea v-model="text.text" v-on:input="input" placeholder="введите текст"></textarea>
-	    			размер:<input v-model="text.size" type="number" v-on:input="input">
-	    			цвет:<input v-model="text.fillStyle" type="color" v-on:input="input">
-	    			шрифт:<select v-model="text.font" v-on:change="input">
-			    		<option v-for="font in fonts" :value="font" >[[font]]</option>
+	    			С‚РµРєСЃС‚:<textarea v-model="text.text" v-on:input="input" placeholder="РІРІРµРґРёС‚Рµ С‚РµРєСЃС‚"></textarea>
+	    			СЂР°Р·РјРµСЂ:<input v-model="text.size" type="number" v-on:input="input">
+	    			С†РІРµС‚:<input v-model="text.fillStyle" type="color" v-on:input="input">
+	    			С€СЂРёС„С‚:<select v-model="text.font" v-on:change="input">
+			    		<option v-for="font in fonts" :value="font" >{{font}}</option>
 			    	</select>
 	    		</div>
-	    		<button v-on:click="textGenerated(i)">генерировать текст</button>
-	    		<button onclick="generator.addText().then()">добавить текст</button>
-	    		<button v-on:click="typeChange">перегенерировать мем</button>
+	    		<button v-on:click="textGenerated(i)">РіРµРЅРµСЂРёСЂРѕРІР°С‚СЊ С‚РµРєСЃС‚</button>
+	    		<button onclick="generator.addText().then()">РґРѕР±Р°РІРёС‚СЊ С‚РµРєСЃС‚</button>
+	    		<button v-on:click="typeChange">РїРµСЂРµРіРµРЅРµСЂРёСЂРѕРІР°С‚СЊ РјРµРј</button>
 	    	</div>
-	    	<h3>Картинки</h3>
+	    	<h3>РљР°СЂС‚РёРЅРєРё</h3>
 	    	<div v-for="text,i in imgs">
-	    		<h4>Картинка [[i+1]]</h4>
-	    		<button v-on:click="imgGenerated(i)">сгенерировать картинку</button>
-	    		<button v-on:click="pictureLoad(i)">загрузить картинку</button>
+	    		<h4>РљР°СЂС‚РёРЅРєР° {{i+1}}</h4>
+	    		<button v-on:click="imgGenerated(i)">СЃРіРµРЅРµСЂРёСЂРѕРІР°С‚СЊ РєР°СЂС‚РёРЅРєСѓ</button>
+	    		<button v-on:click="pictureLoad(i)">Р·Р°РіСЂСѓР·РёС‚СЊ РєР°СЂС‚РёРЅРєСѓ</button>
 	    	</div>
-	    	<button onclick="generator.downImg()">Скачать мем</button>
+	    	<button onclick="generator.downImg()">РЎРєР°С‡Р°С‚СЊ РјРµРј</button>
 	    </div>
 	</div> 
 	<div class="center">
 		<div id="button" button onClick="generator.sendMem()">
-	        <p id="gen" >Поделиться</p>
+	        <p id="gen" >РџРѕРґРµР»РёС‚СЊСЃСЏ</p>
 	    </div>
 	</div>
 	<div style="height: 100px"></div>
