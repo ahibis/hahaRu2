@@ -1,5 +1,5 @@
 {% extends 'Layout.html' %}
-{% block content}
+{% block content %}
 <link rel="stylesheet" href="/static/css/Home.css">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
@@ -9,17 +9,17 @@
 		<canvas src="canvas" id="mem"></canvas>
 	    <div>
 	    	<select v-model="type" v-on:change="typeChange">
-	    		<option v-for="type in types" :value="type" >{{type}}</option>
+	    		<option v-for="type in types" :value="type" >[[type]]</option>
 	    	</select>
 	    	<h3>Тексты</h3>
 	    	<div v-for="text,i in texts">
-	    		<h4>Текст {{i+1}}</h4>
+	    		<h4>Текст [[i+1]]</h4>
 	    		<div class="textPar">
 	    			текст:<textarea v-model="text.text" v-on:input="input" placeholder="введите текст"></textarea>
 	    			размер:<input v-model="text.size" type="number" v-on:input="input">
 	    			цвет:<input v-model="text.fillStyle" type="color" v-on:input="input">
 	    			шрифт:<select v-model="text.font" v-on:change="input">
-			    		<option v-for="font in fonts" :value="font" >{{font}}</option>
+			    		<option v-for="font in fonts" :value="font" >[[font]]</option>
 			    	</select>
 	    		</div>
 	    		<button v-on:click="textGenerated(i)">генерировать текст</button>
@@ -28,7 +28,7 @@
 	    	</div>
 	    	<h3>Картинки</h3>
 	    	<div v-for="text,i in imgs">
-	    		<h4>Картинка {{i+1}}</h4>
+	    		<h4>Картинка [[i+1]]</h4>
 	    		<button v-on:click="imgGenerated(i)">сгенерировать картинку</button>
 	    		<button v-on:click="pictureLoad(i)">загрузить картинку</button>
 	    	</div>
@@ -62,5 +62,5 @@
 	}
 </style>
 
-<script src="/static/js/Mem.js"></script>   
+<script src="/static/js/Mem.js"></script>
 {% endblock content %}

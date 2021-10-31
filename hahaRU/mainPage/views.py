@@ -28,5 +28,5 @@ class Registration(TemplateView):
     template_name = "Registration/index.html"
 
 class User(TemplateView):
-    template_name = "Generator/User.html"
+    template_name = "User/index.html"
 # Create your views here.

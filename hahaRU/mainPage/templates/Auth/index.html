@@ -1,13 +1,14 @@
 {% extends 'Layout2.html' %}
-{% block content}
-    <link href="{% static '/css/Auth.css'%}" rel="stylesheet" />
+
+{% block content %}
+    <link href="/static/css/Auth.css" rel="stylesheet" />
     <div class="authForm" id="auth">
-        <div class="center"><img src="/FinalLogo.png"></div>
-        <input name="Name" id="Name" placeholder="Ââåäèòå èìÿ ïîëüçîâàòåëÿ" />
-        <input name="Password" type="password" placeholder="Ââåäèòå ïàðîëü" />
-        <input type="submit" value="Âîéòè" onclick="login()">
-        <input type="button" value="Çàðåãåñòðèðîâàòüñÿ" onclick="location.href='/Registration'">
-        <div id="message"></div>
+        <div class="center"><img src="/static/FinalLogo.png"></div>
+    <input name="Name" id="Name" placeholder="Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¸Ð¼Ñ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ" />
+    <input name="Password" type="password" placeholder="Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¿Ð°Ñ€Ð¾Ð»ÑŒ" />
+    <input type="submit" value="Ð’Ð¾Ð¹Ñ‚Ð¸" onclick="login()">
+    <input type="button" value="Ð—Ð°Ñ€ÐµÐ³ÐµÑÑ‚Ñ€Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒÑÑ" onclick="location.href='/Registration'">
+    <div id="message"></div>
     </div>     
     <script>
         /*

@@ -1,14 +1,15 @@
-{% extends 'Layout.html' %}
-{% block content}
+{% extends 'Layout2.html' %}
+{% load static %}
+{% block content %}
 <link href="{% static '/css/Auth.css'%}" rel="stylesheet" />
 <div class="authForm" id="auth">
-    <div class="center"><img src="/FinalLogo.png"></div>
-    <input name="Name" placeholder="Ââåäèòå èìÿ ïîëüçîâàòåëÿ" />
-    <input name="email" placeholder="Ââåäèòå email" />
-    <input name="Password" type="password" placeholder="Ââåäèòå ïàðîëü" />
-    <input name="Password2" type="password" placeholder="Ïîâòîðèòå ïàîðîëü" />
-    <input type="submit" name="Login" value="Çàðåãåñòðèðîâàòüñÿ" onclick="registration()">
-    <input type="button" value="åñòü àêêàóíò" onclick="location.href='/Auth'">
+    <div class="center"><img src="/static/FinalLogo.png"></div>
+    <input name="Name" placeholder="Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¸Ð¼Ñ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ" />
+    <input name="email" placeholder="Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ email" />
+    <input name="Password" type="password" placeholder="Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¿Ð°Ñ€Ð¾Ð»ÑŒ" />
+    <input name="Password2" type="password" placeholder="ÐŸÐ¾Ð²Ñ‚Ð¾Ñ€Ð¸Ñ‚Ðµ Ð¿Ð°Ð¾Ñ€Ð¾Ð»ÑŒ" />
+    <input type="submit" name="Login" value="Ð—Ð°Ñ€ÐµÐ³ÐµÑÑ‚Ñ€Ð¸Ñ€Ð¾Ð²Ð°Ñ‚ÑŒÑÑ" onclick="registration()">
+    <input type="button" value="ÐµÑÑ‚ÑŒ Ð°ÐºÐºÐ°ÑƒÐ½Ñ‚" onclick="location.href='/Auth'">
     <div id="message"></div>
     <a href="https://oauth.vk.com/authorize?client_id=7872727&redirect_uri=http://localhost:40807&response_type=code">
         <img src="{% static '/img/VK.png'%}" style="width: 50px;">
