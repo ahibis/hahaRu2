@@ -1,0 +1,20 @@
+{% extends 'Layout.html' %}
+{% block content}
+<link href="{% static '/css/Auth.css'%}" rel="stylesheet" />
+<div class="authForm" id="auth">
+    <div class="center"><img src="/FinalLogo.png"></div>
+    <input name="Name" placeholder="Введите имя пользователя" />
+    <input name="email" placeholder="Введите email" />
+    <input name="Password" type="password" placeholder="Введите пароль" />
+    <input name="Password2" type="password" placeholder="Повторите паороль" />
+    <input type="submit" name="Login" value="Зарегестрироваться" onclick="registration()">
+    <input type="button" value="есть аккаунт" onclick="location.href='/Auth'">
+    <div id="message"></div>
+    <a href="https://oauth.vk.com/authorize?client_id=7872727&redirect_uri=http://localhost:40807&response_type=code">
+        <img src="{% static '/img/VK.png'%}" style="width: 50px;">
+    </a>
+    <a href="https://oauth.vk.com/access_token?client_id=7872727&client_secret=m4ba14GLwrURMZphVM1q&code=516caedefa6b8df686&redirect_uri=http://localhost:40807&response_type=code">
+        <img src="{% static '/img/VK.png'%}" style="width: 50px;">
+    </a>
+</div>                                                                                               
+{% endblock content %}
