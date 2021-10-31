@@ -1,0 +1,22 @@
+{% extends 'Layout2.html' %}
+{% block content}
+    <link href="{% static '/css/Auth.css'%}" rel="stylesheet" />
+    <div class="authForm" id="auth">
+        <div class="center"><img src="/FinalLogo.png"></div>
+        <input name="Name" id="Name" placeholder="Введите имя пользователя" />
+        <input name="Password" type="password" placeholder="Введите пароль" />
+        <input type="submit" value="Войти" onclick="login()">
+        <input type="button" value="Зарегестрироваться" onclick="location.href='/Registration'">
+        <div id="message"></div>
+    </div>     
+    <script>
+        /*
+        $("input").on("input", function () {
+            if (localStorage[$(this).attr("name")]) localStorage[$(this).attr("name")] = $(this).val();
+        })
+        $("input").each(function () {
+            $(this).val(localStorage[$(this).attr("name")]);
+        })*/
+    </script>    
+{% endblock content %}
+                                                                                    
