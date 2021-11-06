@@ -33,7 +33,7 @@ class AnecdotEnd(models.Model):
     text = models.TextField(max_length=1000, default="")
     def __str__(self):
         return self.text
-class AnecdotTexts(models.Model):
+class AnecdotText(models.Model):
     text = models.TextField(max_length=1000, default="")
     def __str__(self):
         return self.text
@@ -64,7 +64,7 @@ class Mem(models.Model):
     disLikesCount = models.IntegerField(default=0)
     def __str__(self):
         return self.text
-class MemPictures(models.Model):
+class MemPicture(models.Model):
     imgSrc = models.CharField(max_length=100, default="")
     def __str__(self):
         return self.imgSrc
