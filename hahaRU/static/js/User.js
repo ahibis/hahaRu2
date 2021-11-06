@@ -1,5 +1,6 @@
 ﻿let vm = new Vue({
     el: "#app",
+    delimiters: ["[[", "]]"],
     data: {
         Login: "НЕСУЩЕСТВУЮЩАЯ СТРАНИЦА",
         Date: "2021-04-15",
