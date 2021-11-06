@@ -29,7 +29,7 @@ function registration() {
         let name = el.attr("name");
         if (name) {form[name]=el.val()}
     })
-    post("Registration/Registration", form).then(r => {
+    post("Registration", form).then(r => {
         $("#message").text(r)
         if(r=="ok") location.href="/"
     })
