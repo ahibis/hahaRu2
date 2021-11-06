@@ -17,3 +17,6 @@ class Comment(models.Model):
     
     def __str__(self):
         return self.text
+
+class Anecdot(models.Model):
+    date = models.DateField(default="")
