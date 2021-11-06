@@ -1,5 +1,2 @@
-/.vscode
-/hahaRu/hahaRu/__pycache__
-/hahaRu/mainPage/__pycache__
-/hahaRu/mainPage/migratiobs/__pycache__
-/hahaRu/mainPage/templates/__pycache__
+.vscode
+__pycache__

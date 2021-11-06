@@ -27,16 +27,21 @@ class Anecdot(models.Model):
     disLikes = models.TextField(default='')
     likesCount = models.IntegerField(default=0)
     disLikesCount = models.IntegerField(default=0)
+    def __str__(self):
+        return self.text
 class AnecdotEnd(models.Model):
     text = models.TextField(max_length=1000, default="")
-
+    def __str__(self):
+        return self.text
 class AnecdotTexts(models.Model):
     text = models.TextField(max_length=1000, default="")
-
+    def __str__(self):
+        return self.text
 class Config(models.Model):
     key = models.CharField(max_length=100, default="")
     value = models.CharField(max_length=100, default="")
-
+    def __str__(self):
+        return self.key
 class FunnyWord(models.Model):
     date = models.DateField(auto_now = True)
     text = models.TextField(max_length=1000, default="")
@@ -46,7 +51,8 @@ class FunnyWord(models.Model):
     disLikes = models.TextField(default='')
     likesCount = models.IntegerField(default=0)
     disLikesCount = models.IntegerField(default=0)
-
+    def __str__(self):
+        return self.text
 class Mem(models.Model):
     date = models.DateField(auto_now = True)
     text = models.TextField(max_length=1000, default="")
@@ -56,10 +62,12 @@ class Mem(models.Model):
     disLikes = models.TextField(default='')
     likesCount = models.IntegerField(default=0)
     disLikesCount = models.IntegerField(default=0)
-
+    def __str__(self):
+        return self.text
 class MemPictures(models.Model):
     imgSrc = models.CharField(max_length=100, default="")
-
+    def __str__(self):
+        return self.imgSrc
 class Post(models.Model):
     date = models.DateField(auto_now = True)
     text = models.TextField(max_length=1000, default="")
@@ -69,7 +77,8 @@ class Post(models.Model):
     disLikes = models.TextField(default='')
     likesCount = models.IntegerField(default=0)
     disLikesCount = models.IntegerField(default=0)
-
+    def __str__(self):
+        return self.text
 class Video(models.Model):
     date = models.DateField(auto_now = True)
     text = models.TextField(max_length=1000, default="")
@@ -79,9 +88,12 @@ class Video(models.Model):
     disLikes = models.TextField(default='')
     likesCount = models.IntegerField(default=0)
     disLikesCount = models.IntegerField(default=0)
-
+    def __str__(self):
+        return self.videoSrc
 class videoSrc(models.Model):
     src = models.CharField(max_length=100, default="")
+    def __str__(self):
+        return self.src
 class User(models.Model):
     Login = models.CharField(max_length=20, default="")
     Password = models.CharField(max_length=100, default="")
