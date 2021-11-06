@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound, Http404
 from mainPage.moduls.guard import filter
 from ..models import User
-import re
+from ..exeptions import BadRequest
 def Register(request):
     if request.method == "POST":
         login = request.POST['Name']
@@ -10,62 +10,54 @@ def Register(request):
         password = request.POST['Password']
         password2 = request.POST['Password2']
         if not login:
-            return {"text": "Логин не может быть пустым!","status": "error"}
+            raise BadRequest("Логин не может быть пустым!");
         if not email:
-            return {"text": "Email не может быть пустым!", "status": "error"}
+            raise BadRequest("Email не может быть пустым!");
         if not password:
-            return {"text": "Пароль не может быть пустым!", "status": "error"}
+            raise BadRequest("Пароль не может быть пустым!");
         if not password2:
-            return {"text": "Повтор пароля не может быть пустым!", "status": "error"}
+            raise BadRequest("Повтор пароля не может быть пустым!");
         login = login.replace(" ", "")
         email = email.replace(" ", "")
         if not (login == filter(request.POST['Name'].replace(" ", ""))):
-            return {"text": "Недопустимые символы в логине!", "status": "error"}
-        if not (email == filter(request.POST['email'].replace(" ", ""))):
-            return {"text": "Недопустимые символы в email!", "status": "error"}
+            raise BadRequest("Недопустимые символы в логине!");
         if not (password == filter(request.POST['Password'])):
-            return {"text": "Недопустимые символы в пароле!", "status": "error"}
+            raise BadRequest("Недопустимые символы в пароле!");
         if not (password2 == filter(request.POST['Password2'])):
-            return {"text": "Недопустимые символы в повторе пароля!", "status": "error"}
+            raise BadRequest("Недопустимые символы в повторе пароля!");
         users = User.objects.filter(Login=login)
         if len(users)>0:
-            return {"text": "Такой пользователь уже зарегистрирован!", "status": "error"}
+            raise BadRequest("пользователь с данным логином уже зарегистрирован!");
         users = User.objects.filter(Email=email)
         if len(users) > 0:
-            return {"text": "Такой email уже занят!", "status": "error"}
+            raise BadRequest("пользователь с данным email уже зарегистрирован!");
         if (password != password2):
-            return {"text": "Пароли не совпадают!", "status": "error"}
+            raise BadRequest("Пароли не совпадают!");
         user = User(Login=login,Password=password,Email=email)
         user.save()
         return {"text":"ок","status":"ok"}
-        '''
-        newUser = User.objects.get(1);
-        newUser["Login"] = "fdfdf";
-        newUser.save()
-        '''
         
-
 
 def Login(request):
     if request.method == "POST":
         login = request.POST['Name']
         password = request.POST['Password']
         if not login:
-            return {"text": "Логин не может быть пустым!","status": "error"}
+            raise BadRequest("Логин не может быть пустым!");
         if not password:
-            return {"text": "Пароль не может быть пустым!", "status": "error"}
+            raise BadRequest("Пароль не может быть пустым!");
         login = login.replace(" ", "")
         if not (login == filter(request.POST['Name'].replace(" ", ""))):
-            return {"text": "Недопустимые символы в логине!", "status": "error"}
+            raise BadRequest("Недопустимые символы в логине!");
         if not (password == filter(request.POST['Password'])):
-            return {"text": "Недопустимые символы в пароле!", "status": "error"}
+            raise BadRequest("Недопустимые символы в повторе пароля!");
         users = User.objects.filter(Login=login)
         if not len(users):
-            return {"text": "Нет пользователя с таким логином!", "status": "error"}
+            raise BadRequest("Нет пользователя с таким логином!")
         user = users[0]
         if not (password == user.Password):
-            return {"text": "Пароль не верен!", "status": "error"}
-        
+            raise BadRequest("Пароль не верен!")
+            
         return {"text":"ок","status":"ok"}
             # if (!Auth.VerifyHashedPassword(user.Password, data.Password)) return "Пароль не верен";
             # httpContext.Session.SetInt32("id", user.Id);

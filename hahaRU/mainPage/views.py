@@ -3,6 +3,7 @@ from django.views.generic import TemplateView, View
 from django.http.response import JsonResponse
 from .models import Articale, Comment
 from .managers.authManager import Register,Login
+from .exeptions import safe
 '''
 def index(request):
     articles = Articale.objects.order_by("-date")
@@ -33,15 +34,12 @@ class User(TemplateView):
     template_name = "User/index.html"
 # Create your views here.
 class RegistartionApi(View):
+    @safe
     def post(self,requests):
-        try:
-            return JsonResponse(Register(requests))
-        except Exception as e:
-            return JsonResponse({"text":"что-то не так","status":"error","what":str(e)})
+        return JsonResponse(Register(requests))
 
 class LoginApi(View):
+    @safe
     def post(self,requests):
-        try:
-            return JsonResponse(Login(requests))
-        except Exception as e:
-            return JsonResponse({"text":"что-то не так","status":"error","what":str(e)})
+        return JsonResponse(Login(requests))
+        

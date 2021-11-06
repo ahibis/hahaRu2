@@ -1,15 +1,25 @@
+from django.http.response import JsonResponse
 class ApiExeption(Exception):
-    text=""
-    status=400
-    def __init__(self, text="",status=400, *args: object) :
-        self.text=text;
-        self.status=status;
-        super().__init__(*args)
+    status = 400
+    message = ""
+    def __init__(self, message = "",status = 400) :
+        self.message = message;
+        self.status = status;
+        super().__init__(message)
+class BadRequest(ApiExeption):
+    def __init__(self, message = "",status = 400) :
+        super().__init__(message, status)
 
-class badRequest(ApiExeption):
-    def __init__(self, text="",status=400, *args: object) :
-        super().__init__(text,status,*args)
+class AuthError(ApiExeption):
+    def __init__(self, message = "Пользователь не авторизован",status = 401) :
+        super().__init__(message, status)
 
-class authError(ApiExeption):
-    def __init__(self, text="Пользователь не авторизован",status=401, *args: object) :
-        super().__init__(text,status,*args)
+def safe(func):
+    def decorator(*args,**kargs):
+        try:
+            return func(*args,**kargs)
+        except ApiExeption as e:
+            return JsonResponse({"text":e.message,"status":"error"}, status=e.status)
+        except Exception as e:
+            return JsonResponse({"text":"непредвиденная ошибка","status":"error","message":str(e)}, status=500)
+    return decorator

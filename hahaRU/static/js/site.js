@@ -1,24 +1,36 @@
 ﻿//пост запрос через Ajax с объектом данных
 function post(Url, data = {}) {
     return new Promise((resolve, reject) => {
-        $.post('/' + Url, data, (Data) => {
-            resolve(Data);
+        $.post('/' + Url, data, Data => resolve(Data)).fail(Data => {
+            if (Data.responseJSON){
+                Data.responseJSON.code=Data.status
+                return resolve(Data.responseJSON)
+            } 
+            return {status:"error",e:e}
         });
     })
 }
 //get запрос через Ajax с объектом данных
 function get(Url, data = {}) {
     return new Promise((resolve, reject) => {
-        $.get('/' + Url, data, (Data) => {
-            resolve(Data);
+        $.get('/' + Url, data, Data => resolve(Data)).fail(Data => {
+            if (Data.responseJSON){
+                Data.responseJSON.code=Data.status
+                return resolve(Data.responseJSON)
+            } 
+            return {status:"error",e:e}
         });
     })
 }
 //запрос через Ajax с объектом данных по адресу api/method
 function api(method, data = {}) {
     return new Promise((resolve, reject) => {
-        $.post('/api/' + method, data, (Data) => {
-            resolve(Data);
+        $.post('/api/' + method, data, Data => resolve(Data)).fail(Data => {
+            if (Data.responseJSON){
+                Data.responseJSON.code=Data.status
+                return resolve(Data.responseJSON)
+            } 
+            return {status:"error",e:e}
         });
     })
 }
