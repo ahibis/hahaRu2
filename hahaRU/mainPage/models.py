@@ -19,4 +19,66 @@ class Comment(models.Model):
         return self.text
 
 class Anecdot(models.Model):
-    date = models.DateField(default="")
+    date = models.DateField(auto_now = True)
+    text = models.TextField(max_length=1000, default="")
+    videoSrc = models.CharField(max_length=100, default="")
+    imgSrc = models.CharField(max_length=100, default="")
+    likes = models.TextField(default='')
+    disLikes = models.TextField(default='')
+    likesCount = models.IntegerField(default=0)
+    disLikesCount = models.IntegerField(default=0)
+class AnecdotEnd(models.Model):
+    text = models.TextField(max_length=1000, default="")
+
+class AnecdotTexts(models.Model):
+    text = models.TextField(max_length=1000, default="")
+
+class Config(models.Model):
+    key = models.CharField(max_length=100, default="")
+    value = models.CharField(max_length=100, default="")
+
+class FunnyWord(models.Model):
+    date = models.DateField(auto_now = True)
+    text = models.TextField(max_length=1000, default="")
+    videoSrc = models.CharField(max_length=100, default="")
+    imgSrc = models.CharField(max_length=100, default="")
+    likes = models.TextField(default='')
+    disLikes = models.TextField(default='')
+    likesCount = models.IntegerField(default=0)
+    disLikesCount = models.IntegerField(default=0)
+
+class Mem(models.Model):
+    date = models.DateField(auto_now = True)
+    text = models.TextField(max_length=1000, default="")
+    videoSrc = models.CharField(max_length=100, default="")
+    imgSrc = models.CharField(max_length=100, default="")
+    likes = models.TextField(default='')
+    disLikes = models.TextField(default='')
+    likesCount = models.IntegerField(default=0)
+    disLikesCount = models.IntegerField(default=0)
+
+class MemPictures(models.Model):
+    imgSrc = models.CharField(max_length=100, default="")
+
+class Post(models.Model):
+    date = models.DateField(auto_now = True)
+    text = models.TextField(max_length=1000, default="")
+    videoSrc = models.CharField(max_length=100, default="")
+    imgSrc = models.CharField(max_length=100, default="")
+    likes = models.TextField(default='')
+    disLikes = models.TextField(default='')
+    likesCount = models.IntegerField(default=0)
+    disLikesCount = models.IntegerField(default=0)
+
+class Video(models.Model):
+    date = models.DateField(auto_now = True)
+    text = models.TextField(max_length=1000, default="")
+    videoSrc = models.CharField(max_length=100, default="")
+    imgSrc = models.CharField(max_length=100, default="")
+    likes = models.TextField(default='')
+    disLikes = models.TextField(default='')
+    likesCount = models.IntegerField(default=0)
+    disLikesCount = models.IntegerField(default=0)
+
+class videoSrc(models.Model):
+    src = models.CharField(max_length=100, default="")
