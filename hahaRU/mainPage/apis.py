@@ -8,4 +8,4 @@ class GetUser(View):
 
 class GetMy(View):
     def post(self, requests, *args, **kargs):
-        return JsonResponse(getMy(id,requests))
+        return JsonResponse(getMy(requests))

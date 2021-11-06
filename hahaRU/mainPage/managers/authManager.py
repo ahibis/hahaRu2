@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound, Http404
-import mainPage.moduls.guard
+from mainPage.moduls.guard import filter
 from ..models import User
-
+import re
 def Register(request):
     if request.method == "POST":
         login = request.POST['Name']
@@ -19,24 +19,31 @@ def Register(request):
             return {"text": "Повтор пароля не может быть пустым!", "status": "error"}
         login = login.replace(" ", "")
         email = email.replace(" ", "")
-        if not (login == mainPage.moduls.guard.filter(request.POST['Name'].replace(" ", ""))):
+        if not (login == filter(request.POST['Name'].replace(" ", ""))):
             return {"text": "Недопустимые символы в логине!", "status": "error"}
-        if not (email == mainPage.moduls.guard.filter(request.POST['email'].replace(" ", ""))):
+        if not (email == filter(request.POST['email'].replace(" ", ""))):
             return {"text": "Недопустимые символы в email!", "status": "error"}
-        if not (password == main.guard.filter(request.POST['Password'])):
+        if not (password == filter(request.POST['Password'])):
             return {"text": "Недопустимые символы в пароле!", "status": "error"}
-        if not (password2 == main.guard.filter(request.POST['Password2'])):
+        if not (password2 == filter(request.POST['Password2'])):
             return {"text": "Недопустимые символы в повторе пароля!", "status": "error"}
         users = User.objects.filter(Login=login)
-        if count(users)>0:
+        if len(users)>0:
             return {"text": "Такой пользователь уже зарегистрирован!", "status": "error"}
         users = User.objects.filter(Email=email)
-        if count(users) > 0:
+        if len(users) > 0:
             return {"text": "Такой email уже занят!", "status": "error"}
         if (password != password2):
             return {"text": "Пароли не совпадают!", "status": "error"}
-        user = User(login,password,email)
+        user = User(Login=login,Password=password,Email=email)
         user.save()
+        return {"text":"ок","status":"ok"}
+        '''
+        newUser = User.objects.get(1);
+        newUser["Login"] = "fdfdf";
+        newUser.save()
+        '''
+        
 
 
 def Login(request):
@@ -48,16 +55,17 @@ def Login(request):
         if not password:
             return {"text": "Пароль не может быть пустым!", "status": "error"}
         login = login.replace(" ", "")
-        if not (login == mainPage.moduls.guard.filter(request.POST['Name'].replace(" ", ""))):
+        if not (login == filter(request.POST['Name'].replace(" ", ""))):
             return {"text": "Недопустимые символы в логине!", "status": "error"}
-        if not (password == main.guard.filter(request.POST['Password'])):
+        if not (password == filter(request.POST['Password'])):
             return {"text": "Недопустимые символы в пароле!", "status": "error"}
         users = User.objects.filter(Login=login)
-        if not count(users):
+        if not len(users):
             return {"text": "Нет пользователя с таким логином!", "status": "error"}
         user = users[0]
         if not (password == user.Password):
             return {"text": "Пароль не верен!", "status": "error"}
-
+        
+        return {"text":"ок","status":"ok"}
             # if (!Auth.VerifyHashedPassword(user.Password, data.Password)) return "Пароль не верен";
             # httpContext.Session.SetInt32("id", user.Id);

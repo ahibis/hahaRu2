@@ -86,7 +86,7 @@ class User(models.Model):
     Login = models.CharField(max_length=20, default="")
     Password = models.CharField(max_length=100, default="")
     AvatarSrc = models.CharField(max_length=256, default="")
-    Date = models.DateField(auto_now=True, default="")
+    Date = models.DateField(auto_now=True)
     Email = models.CharField(max_length=50, default="")
     Status = models.CharField(max_length=100, default="")
     FavoriteJoke = models.CharField(max_length=512, default="")

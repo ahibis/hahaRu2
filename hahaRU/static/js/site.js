@@ -30,8 +30,9 @@ function registration() {
         if (name) {form[name]=el.val()}
     })
     post("Registration/Registration", form).then(r => {
-        $("#message").text(r)
-        if(r=="ok") location.href="/"
+        console.log(r);
+        $("#message").text(r.text)
+        if(r.status=="ok") location.href="/"
     })
 }
 function login() {
@@ -42,8 +43,9 @@ function login() {
         if (name) { form[name] = el.val() }
     })
     post("Auth/Login", form).then(r => {
-        $("#message").text(r)
-        if (r == "ok") location.href = "/"
+        console.log(r);
+        $("#message").text(r.text)
+        if (r.status == "ok") location.href = "/"
     })
 }
 my = {};
