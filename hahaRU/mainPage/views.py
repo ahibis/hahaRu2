@@ -41,6 +41,16 @@ class Registration(TemplateView):
 
 class User(TemplateView):
     template_name = "User/index.html"
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['id'] = 0
+        return context
+class UserId(TemplateView):
+    template_name = "User/index.html"
+    def get_context_data(self, id, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['id'] = id
+        return context        
 # Create your views here.
 class RegistartionApi(View):
     @safe

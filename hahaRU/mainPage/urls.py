@@ -13,5 +13,6 @@ urlpatterns = [
     path('Auth/Login', LoginApi.as_view()),
     path('Auth', Auth.as_view()),
     path('Registration', Registration.as_view()),
-    path('User', User.as_view())
+    path('User', User.as_view()),
+    path('User/<int:id>', UserId.as_view())
 ]

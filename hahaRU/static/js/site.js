@@ -6,7 +6,7 @@ function post(Url, data = {}) {
                 Data.responseJSON.code=Data.status
                 return resolve(Data.responseJSON)
             } 
-            return {status:"error",e:e}
+            return {status:"error"}
         });
     })
 }
@@ -18,7 +18,7 @@ function get(Url, data = {}) {
                 Data.responseJSON.code=Data.status
                 return resolve(Data.responseJSON)
             } 
-            return {status:"error",e:e}
+            return {status:"error"}
         });
     })
 }
@@ -30,7 +30,7 @@ function api(method, data = {}) {
                 Data.responseJSON.code=Data.status
                 return resolve(Data.responseJSON)
             } 
-            return {status:"error",e:e}
+            return {status:"error"}
         });
     })
 }
@@ -63,7 +63,6 @@ function login() {
 my = {};
 $(document).ready(async function () {
     my = await api("getMy");
-    my = JSON.parse(my);
     if (!my.Login) $("#userLink").attr("href", "/Auth");  
     my.Login = (my.Login || "авторизоваться");
     $("#userName").text(my.Login);

@@ -9,26 +9,26 @@
         VkLink: "ссылка на вк",
         InstaLink: "ссылка на instagram",
         OK: "ссылка на одноклассники",
-        Id: 0,
+        id: 0,
         Likes: 0,
         DisLikes: 0,
         Posts: [],
         User: {},
         edit: 1,
-        AvatarSrc: "/img/logo.png",
+        AvatarSrc: "static/img/logo.png",
         text: ""
     },
     methods: {
         sendPost:async function() {
             console.log(await api("sendPost", { Text: this.text, Date: new Date().toJSON().split("T")[0] }));
             this.text = "";
-            let posts = await api("getPosts", { UserId: my.Id, Offset: 0, Count: 1 });
+            let posts = await api("getPosts", { UserId: my.id, Offset: 0, Count: 1 });
             console.log(posts);
             lastPost += posts.length;
             vm.Posts = [...posts, ...vm.Posts];
         },
         avaChange: async function () {
-            if (!(ID == 0 || this.Id == ID)) return
+            if (!(ID == 0 || this.id == ID)) return
             let data = await sendFiles("api/saveAva");
             if (data.value)
                 this.AvatarSrc = data.value;
@@ -61,13 +61,13 @@ async function formChange() {
     data = {};
     name = $(this).attr("name")
     data[name] = $(this).val();
-    data.Id = vm.Id;
+    data.id = vm.id;
     console.log(await api("updateUser",data));
 }
 let my;
 let lastPost = 0;
 async function getPosts() {
-    let posts = await api("getPosts", { UserId: my.Id,Offset:lastPost });
+    let posts = await api("getPosts", { UserId: my.id,Offset:lastPost });
     lastPost += posts.length;
     vm.Posts = [...vm.Posts,...posts ]
 }
@@ -80,10 +80,8 @@ $("#app").hide()
 $(document).ready(async function () {
     
     my = await api("getMy");
-    my = JSON.parse(my);
-    if ((ID!=my.Id)&&ID) {
+    if ((ID!=my.id)&&ID) {
         my = await api("getUser", { id: ID });
-        my = JSON.parse(my);
         $(".Data input").attr("readonly", true)
         $(".Data textarea").attr("readonly", true)
         vm = Object.assign(vm, my);
@@ -92,7 +90,7 @@ $(document).ready(async function () {
         getPosts()
         return;
     } 
-    if (!my.Id) location.href = "/Auth";
+    if (!my.id) location.href = "/Auth";
     vm = Object.assign(vm, my);
     getPosts()
     $(".Data input").on("input", formChange)

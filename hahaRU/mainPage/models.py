@@ -108,7 +108,7 @@ class User(models.Model):
         "blank":"пароль не может быть пустым"
     })
     Date = models.DateField(auto_now=True)
-    AvatarSrc = models.SlugField(max_length=256, default="", blank=True)
+    AvatarSrc = models.CharField(max_length=256, default="static/img/logo.png", blank=True)
     Status = models.CharField(max_length=100, default="", blank=True)
     FavoriteJoke = models.CharField(max_length=512, default="", blank=True)
     VkLink = models.CharField(max_length=100, default="", blank=True)
