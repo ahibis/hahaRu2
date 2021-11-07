@@ -3,9 +3,10 @@ from django.http.response import JsonResponse
 from .managers.apiManager import *
 
 class GetUser(View):
-    def post(self):
+    def post(self, requests):
+        
         return JsonResponse(getUser(1))
 
 class GetMy(View):
-    def post(self, requests, *args, **kargs):
-        return JsonResponse(getMy(requests))
+    def post(self, requests):
+        return JsonResponse(getMy(requests.session))

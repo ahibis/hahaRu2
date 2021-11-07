@@ -1,6 +1,6 @@
 from django.db import models
 from django.db.models.deletion import CASCADE
-
+from django.core.validators import EmailValidator, validate_slug
 # Create your models here.
 class Articale(models.Model):
     title = models.CharField("name of title", max_length=200);
@@ -95,15 +95,24 @@ class videoSrc(models.Model):
     def __str__(self):
         return self.src
 class User(models.Model):
-    Login = models.CharField(max_length=20, default="")
-    Password = models.CharField(max_length=100, default="")
-    AvatarSrc = models.CharField(max_length=256, default="")
+    Login = models.SlugField(max_length=20, error_messages={
+        "blank":"логин не может быть пустым",
+        "invalid":"логин должен состоять только из латинских букв, цифр, знаков подчеркивания или дефиса."
+    })
+    Password = models.CharField(max_length=100,error_messages={
+        "blank":"пароль не может быть пустым"
+    })
+    Email = models.CharField(max_length=50, validators=[
+        EmailValidator(message="не корректный email")
+    ],error_messages={
+        "blank":"пароль не может быть пустым"
+    })
     Date = models.DateField(auto_now=True)
-    Email = models.CharField(max_length=50, default="")
-    Status = models.CharField(max_length=100, default="")
-    FavoriteJoke = models.CharField(max_length=512, default="")
-    VkLink = models.CharField(max_length=100, default="")
-    Telegram = models.CharField(max_length=100, default="")
-    InstaLink = models.CharField(max_length=100, default="")
+    AvatarSrc = models.SlugField(max_length=256, default="", blank=True)
+    Status = models.CharField(max_length=100, default="", blank=True)
+    FavoriteJoke = models.CharField(max_length=512, default="", blank=True)
+    VkLink = models.CharField(max_length=100, default="", blank=True)
+    Telegram = models.CharField(max_length=100, default="", blank=True)
+    InstaLink = models.CharField(max_length=100, default="", blank=True)
     def __str__(self):
         return self.Login

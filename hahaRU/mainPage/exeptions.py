@@ -1,4 +1,7 @@
+from django.db import models
+from django.db.models.base import Model
 from django.http.response import JsonResponse
+from django.core.exceptions import ValidationError
 class ApiExeption(Exception):
     status = 400
     message = ""
@@ -23,3 +26,9 @@ def safe(func):
         except Exception as e:
             return JsonResponse({"text":"непредвиденная ошибка","status":"error","message":str(e)}, status=500)
     return decorator
+
+def check(model:models.Model):
+    try:
+        model.full_clean()
+    except ValidationError as e:
+        raise BadRequest(e.messages[0])

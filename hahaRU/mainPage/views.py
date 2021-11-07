@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView, View
 from django.http.response import JsonResponse
 from .models import Articale, Comment, FunnyWord
-from .managers.authManager import Register,Login
+from .managers.authManager import Register, Login
 from .exeptions import safe
 from .managers.GeneratorManager import anecdotGen, funnyWordGen
 '''
