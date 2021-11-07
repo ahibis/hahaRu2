@@ -1,6 +1,8 @@
+
 def getUser(id):
     return {}
 
-def getMy(requests):
+def getMy(session):
+    
     return {}
     
