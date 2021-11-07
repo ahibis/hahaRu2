@@ -1,8 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseNotFound, Http404
+
 from django.core.exceptions import ValidationError
 from ..models import User
 from ..exeptions import BadRequest, check
+import bcrypt
 def Register(request):
     if request.method == "POST":
         login = request.POST['Name']
@@ -19,12 +21,14 @@ def Register(request):
             raise BadRequest("пользователь с данным email уже зарегистрирован!");
         if (password != password2):
             raise BadRequest("Пароли не совпадают!")
+        password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt()).decode('utf-8')
         user = User(Login=login,Password=password,Email=email)
         check(user)
         user.save()
         request.session["id"]= user.id
         return {"text":"ок","status":"ok"}
         
+
 
 def Login(request):
     if request.method == "POST":
@@ -34,10 +38,12 @@ def Login(request):
         if not len(users):
             raise BadRequest("Нет пользователя с таким логином!")
         user = users[0]
-        if not (password == user.Password):
+        if not bcrypt.checkpw(password.encode('utf-8'), user.Password.encode('utf-8')):
             raise BadRequest("Пароль не верен!")
         check(user)
         request.session["id"]= user.id
         return {"text":"ок","status":"ok"}
-            # if (!Auth.VerifyHashedPassword(user.Password, data.Password)) return "Пароль не верен";
-            # httpContext.Session.SetInt32("id", user.Id);
+
+def logout_view(request):
+    pass
+
