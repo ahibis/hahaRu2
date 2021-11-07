@@ -12,12 +12,12 @@
 }
 
 body::-webkit-scrollbar {
-    width: 7px;
+    width: 0.8vw;
     background: linear-gradient(#ffe66b, #FFC15F);
 }
 
 body::-webkit-scrollbar-thumb {
-    border-radius: 10px;
+    border-radius: 0.8vw;
     background-color: #ec6f3c;
 }
 
@@ -46,9 +46,11 @@ body::-webkit-scrollbar-thumb {
     display: flex;
     justify-content: center;
 }
-#userName{
-    margin-bottom:10px;
+
+#userName {
+    margin-bottom: 10px;
 }
+
 #gen {
     margin-top: 24px;
     text-align: center;
@@ -64,7 +66,7 @@ body::-webkit-scrollbar-thumb {
     color: #373F41;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     text-align: center;
-    align-items:center;
+    align-items: center;
     padding-top: 8vw;
 }
 
@@ -124,7 +126,6 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
     max-width: 1080px;
     margin: 0 auto;
-
 }
 
 .header {
@@ -138,12 +139,36 @@ h1, h2, h3, h4, h5, h6 {
     padding-top: 1vw;
     margin-left: 3.5vw;
     margin-top: 10px;
+    transition: all 0.5s ease;
 }
 
 .header_inner {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+header.sticky {
+    background: #ffe56b;
+    height: 4.5vw;
+    width: 99.2vw;
+    border-radius: 0;
+    padding-top: 0.1vw;
+    margin-left: 0;
+    margin-top: 0;
+    transition: all 0.5s ease;
+}
+
+div.sticky {
+    position: -webkit-sticky; /* for Safari */
+    position: sticky;
+    top: 0;
+    /*padding-left: 1vw;*/
+    transition: all 0.5s ease;
+}
+
+div {
+    transition: all 0.5s ease;
 }
 
 .nav {
@@ -159,13 +184,14 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: space-between;
 }
 
-a{
-    text-decoration:none;
+a {
+    text-decoration: none;
 }
 
 .logo {
-    width:12.3vw;
+    width: 12.3vw;
 }
+
 .wrap {
     background: white;
     border-radius: 15px;
@@ -182,8 +208,7 @@ a{
     align-content: center;
 }
 
-.nav_link:hover {
-    color: #EC6F3C;
-    text-decoration:none;
-}
-
+    .nav_link:hover {
+        color: #EC6F3C;
+        text-decoration: none;
+    }
