@@ -106,11 +106,16 @@ body::-webkit-scrollbar-thumb {
     width: 404px;
     box-shadow: 2px 2px 4px rgba(0,0,0,0.25);
     margin-left: 0px;
+    transition: all .3s ease;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    margin: 0;
-}
+    #button:hover {
+        transform: scale3d(0.99, 0.99, 0.99);
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        margin: 0;
+    }
 
 .between {
     display: flex;
@@ -130,7 +135,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .header {
     background: white;
-    height: 5.834vw;
+    height: 5.834vw;        
     border-radius: 1vw;
     width: 93vw;
     box-shadow: 0.139vw 0.139vw 0.278vw rgba(0,0,0,0.25);
@@ -149,26 +154,20 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 header.sticky {
-    background: #ffe56b;
+    background: #ffefa6;
     height: 4.5vw;
     width: 99.2vw;
     border-radius: 0;
     padding-top: 0.1vw;
     margin-left: 0;
     margin-top: 0;
-    transition: all 0.5s ease;
+    transition: all 0.5s ease 0.1s;
 }
 
 div.sticky {
     position: -webkit-sticky; /* for Safari */
     position: sticky;
     top: 0;
-    /*padding-left: 1vw;*/
-    transition: all 0.5s ease;
-}
-
-div {
-    transition: all 0.5s ease;
 }
 
 .nav {
@@ -203,7 +202,7 @@ a {
     display: inline-block;
     color: #373F41;
     text-decoration: none;
-    transition: color .3s linear;
+    transition: all .3s linear;
     display: flex;
     align-content: center;
 }
@@ -211,4 +210,13 @@ a {
     .nav_link:hover {
         color: #EC6F3C;
         text-decoration: none;
+        transform: scale3d(1.1, 1.1, 1.1);
+        /*animation: rubber 1s ease forwards;*/
     }
+
+/*    @keyframes rubber {
+        100% {
+            color: #EC6F3C;
+            text-decoration: none;
+        }
+    }*/
