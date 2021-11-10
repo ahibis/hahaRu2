@@ -210,7 +210,7 @@ a {
     .nav_link:hover {
         color: #EC6F3C;
         text-decoration: none;
-        transform: scale3d(1.1, 1.1, 1.1);
+        transform: scale3d(1.05, 1.05, 1.05);
         /*animation: rubber 1s ease forwards;*/
     }
 
