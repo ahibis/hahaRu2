@@ -12,12 +12,12 @@
 }
 
 body::-webkit-scrollbar {
-    width: 7px;
+    width: 0.8vw;
     background: linear-gradient(#ffe66b, #FFC15F);
 }
 
 body::-webkit-scrollbar-thumb {
-    border-radius: 10px;
+    border-radius: 0.8vw;
     background-color: #ec6f3c;
 }
 
@@ -46,9 +46,11 @@ body::-webkit-scrollbar-thumb {
     display: flex;
     justify-content: center;
 }
-#userName{
-    margin-bottom:10px;
+
+#userName {
+    margin-bottom: 10px;
 }
+
 #gen {
     margin-top: 24px;
     text-align: center;
@@ -64,7 +66,7 @@ body::-webkit-scrollbar-thumb {
     color: #373F41;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     text-align: center;
-    align-items:center;
+    align-items: center;
     padding-top: 8vw;
 }
 
@@ -104,11 +106,16 @@ body::-webkit-scrollbar-thumb {
     width: 404px;
     box-shadow: 2px 2px 4px rgba(0,0,0,0.25);
     margin-left: 0px;
+    transition: all .3s ease;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    margin: 0;
-}
+    #button:hover {
+        transform: scale3d(0.99, 0.99, 0.99);
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        margin: 0;
+    }
 
 .between {
     display: flex;
@@ -124,12 +131,11 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
     max-width: 1080px;
     margin: 0 auto;
-
 }
 
 .header {
     background: white;
-    height: 5.834vw;
+    height: 5.834vw;        
     border-radius: 1vw;
     width: 93vw;
     box-shadow: 0.139vw 0.139vw 0.278vw rgba(0,0,0,0.25);
@@ -138,12 +144,30 @@ h1, h2, h3, h4, h5, h6 {
     padding-top: 1vw;
     margin-left: 3.5vw;
     margin-top: 10px;
+    transition: all 0.5s ease;
 }
 
 .header_inner {
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+header.sticky {
+    background: #ffefa6;
+    height: 4.5vw;
+    width: 99.2vw;
+    border-radius: 0;
+    padding-top: 0.1vw;
+    margin-left: 0;
+    margin-top: 0;
+    transition: all 0.5s ease 0.1s;
+}
+
+div.sticky {
+    position: -webkit-sticky; /* for Safari */
+    position: sticky;
+    top: 0;
 }
 
 .nav {
@@ -159,13 +183,14 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: space-between;
 }
 
-a{
-    text-decoration:none;
+a {
+    text-decoration: none;
 }
 
 .logo {
-    width:12.3vw;
+    width: 12.3vw;
 }
+
 .wrap {
     background: white;
     border-radius: 15px;
@@ -177,13 +202,21 @@ a{
     display: inline-block;
     color: #373F41;
     text-decoration: none;
-    transition: color .3s linear;
+    transition: all .3s linear;
     display: flex;
     align-content: center;
 }
 
-.nav_link:hover {
-    color: #EC6F3C;
-    text-decoration:none;
-}
+    .nav_link:hover {
+        color: #EC6F3C;
+        text-decoration: none;
+        transform: scale3d(1.1, 1.1, 1.1);
+        /*animation: rubber 1s ease forwards;*/
+    }
 
+/*    @keyframes rubber {
+        100% {
+            color: #EC6F3C;
+            text-decoration: none;
+        }
+    }*/
