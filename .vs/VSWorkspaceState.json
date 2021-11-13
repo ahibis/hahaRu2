@@ -3,12 +3,13 @@
     "",
     "\\hahaRU",
     "\\hahaRU\\mainPage",
+    "\\hahaRU\\mainPage\\managers",
     "\\hahaRU\\mainPage\\templates",
     "\\hahaRU\\mainPage\\templates\\Generator",
     "\\hahaRU\\static",
     "\\hahaRU\\static\\css",
     "\\hahaRU\\static\\js"
   ],
-  "SelectedNode": "\\hahaRU\\mainPage\\templates\\Generator\\Jokes.html",
+  "SelectedNode": "\\hahaRU\\mainPage\\managers\\GeneratorManager.py",
   "PreviewInSolutionExplorer": false
 }

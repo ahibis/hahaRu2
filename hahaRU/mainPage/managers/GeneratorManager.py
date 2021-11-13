@@ -35,16 +35,16 @@ def wordGen():
     bonus = [ "Похороны", "Абоба"];
     if (i == 0):
         return bonus[random.randint(0, 1)]
-    s1 = [ "Д", "Б", "Х", "П" ]
-    s = s1[random.randint(0, 3)];
+    s1 = [ "Д", "Б", "П" ]                              # s1 = [ "Д", "Б", "Х", "П" ]
+    s = s1[random.randint(0, 2)];                            # s = s1[random.randint(0, 3)];
     s2 = [ "аб", "об", "уб", "ыб", "еб", "иб" ];
     s += s2[random.randint(0, 5)];
     A = [ s, "Пип", "Зелеб", "Еб", "Ебол", "Хеб", "Поп" ];
     s3 = A[random.randint(0, 5)];
     B = [ "y", "ы", "e", "o" ];
     s3 += B[random.randint(0, 3)];
-    C = [ "лда", "га", "бa", "нгa" ];
-    s3 += C[random.randint(0, 3)];
+    C = [ "лда", "га", "бa", "нгa", "ус" ];
+    s3 += C[random.randint(0, 4)];
     return s3;  
               
 def funnyWordGen():

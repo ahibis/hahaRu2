@@ -9,11 +9,16 @@
         </div>
     </div>
     <div id="funnyword">
-        <p>{{ word }}</p>
+        <p id="funnywordresult">{{ word }}</p>
+    </div>
+    <div class="copybutton">
+        <div id="buttonsmall">
+            <p id="gen2" button onclick="CopyText()">Копировать</p>
+        </div>
     </div>
     <div style="height:200px"></div>
     <div class="block" v-for="post in Posts">
-        <div class="inner" >
+        <div class="inner">
             <div class="date">[[post.date]]</div>
             <div class="anekdot">[[post.text]]</div>
             <div class="between">
@@ -21,7 +26,20 @@
                 <div class="dislike" v-on:click="changeDisLike(post.id)" :id="post.id">[[post.dislikesCount]]<img src="{% static '/img/Like 2.png'%}" class="dislike1"></div>
             </div>
         </div>
-    </div> 
+    </div>
+    <script>
+        function CopyText() {
+            var copyText = document.getElementById("#funnywordresult");  /* Get the text field */
+            copyText.select();                                          /* Select the text field */
+            copyText.setSelectionRange(0, 99999);                       /* For mobile devices */
+            navigator.clipboard.writeText(copyText.value);              /* Copy the text inside the text field */
+            alert("Copied the text: " + copyText.value);                /* Alert the copied text */
+        }
+        //function CopyText() {
+        //    navigator.clipboard.readText().then(
+        //        clipText => document.querySelector("funnywordresult").innerText = clipText);
+        //}
+    </script>
 </div>
 <script src="{% static '/js/funnyword.js'%}"></script>    
 {% endblock content %}
