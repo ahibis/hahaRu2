@@ -1,0 +1,21 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ahaha & hehehe</title>
+    <script src="{% static '/lib/jquery/dist/jquery.min.js'%}"></script>
+    <link rel="stylesheet" href="{% static '/css/site.css'%}" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,600;1,300&display=swap" rel="stylesheet">
+    <link rel="shortcat icon" href="/static/FinalLogo.png" type="image/png">
+</head>
+<body>
+    <main role="main">
+        {% block content %}{% endblock content %}
+    </main>
+    <script src="{% static '/lib/jquery/dist/jquery.min.js'%}"></script>
+    <script src="{% static '/js/site.js'%}" asp-append-version="true"></script>
+</body>
+</html>
