@@ -20,9 +20,9 @@
     },
     methods: {
         sendPost:async function() {
-            console.log(await api("sendPost", { Text: this.text, Date: new Date().toJSON().split("T")[0] }));
+            console.log(await api("sendPost", { text: this.text}));
             this.text = "";
-            let posts = await api("getPosts", { UserId: my.id, Offset: 0, Count: 1 });
+            let posts = (await api("getPosts", { userId: my.id, offset: 0, count: 1 })).data
             console.log(posts);
             lastPost += posts.length;
             vm.Posts = [...posts, ...vm.Posts];
@@ -67,7 +67,7 @@ async function formChange() {
 let my;
 let lastPost = 0;
 async function getPosts() {
-    let posts = await api("getPosts", { UserId: my.id,Offset:lastPost });
+    let posts = (await api("getPosts", { userId: my.id,offset:lastPost })).data;
     lastPost += posts.length;
     vm.Posts = [...vm.Posts,...posts ]
 }

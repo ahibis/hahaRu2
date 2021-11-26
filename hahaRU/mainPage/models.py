@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models.deletion import CASCADE
 from django.core.validators import EmailValidator, validate_slug
+
 # Create your models here.
 class Articale(models.Model):
     title = models.CharField("name of title", max_length=200);
@@ -68,6 +69,10 @@ class MemPicture(models.Model):
     imgSrc = models.CharField(max_length=100, default="")
     def __str__(self):
         return self.imgSrc
+class MemText(models.Model):
+    text = models.CharField(max_length=100, default="")
+    def __str__(self):
+        return self.text
 class Post(models.Model):
     date = models.DateField(auto_now = True)
     text = models.TextField(max_length=1000, default="")
@@ -77,6 +82,7 @@ class Post(models.Model):
     disLikes = models.TextField(default='')
     likesCount = models.IntegerField(default=0)
     disLikesCount = models.IntegerField(default=0)
+    userId = models.IntegerField(default=0)
     def __str__(self):
         return self.text
 class Video(models.Model):
@@ -108,7 +114,7 @@ class User(models.Model):
         "blank":"пароль не может быть пустым"
     })
     Date = models.DateField(auto_now=True)
-    AvatarSrc = models.CharField(max_length=256, default="static/img/logo.png", blank=True)
+    AvatarSrc = models.CharField(max_length=256, default="/static/img/logo.png", blank=True)
     Status = models.CharField(max_length=100, default="", blank=True)
     FavoriteJoke = models.CharField(max_length=512, default="", blank=True)
     VkLink = models.CharField(max_length=100, default="", blank=True)

@@ -28,7 +28,7 @@
 })
 let lastPost = 0;
 async function load() {
-    let posts = await api("getContents", { Offset: lastPost, Count: 20, type:"funnyWord"  });
+    let posts = (await api("getContents", { offset: lastPost, count: 20, type:"funnyWord"  })).data;
     lastPost += posts.length;
     vm.Posts = [...vm.Posts,...posts];
     return posts.length;

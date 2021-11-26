@@ -118,13 +118,13 @@ class Img {
 }
 class MemGenerator{
     async getRandomText(){
-        let data=await api("getRundomMemText");
+        let data=await api("getRandomMemText");
             if(data.value)
                 return data.value.text;
             return "Ахаха-Хэхэ"
     }
     async getRandomImg(){
-        let data=await api("getRundomMemImg");
+        let data=await api("getRandomMemImg");
             if(data.value)
                 return '/img/memImgs/'+data.value.imgSrc;
             return '/img/memImgs/Putin.jpg'
@@ -304,7 +304,7 @@ generator = new MemGenerator();
 
 let lastPost = 0;
 async function load() {
-    let posts = await api("getContents", { Offset: lastPost, Count: 20, type:"mem"  });
+    let posts = (await api("getContents", { offset: lastPost, count: 20, type:"mem"  })).data;
     lastPost += posts.length;
     vm.Posts = [...vm.Posts,...posts];
 }
