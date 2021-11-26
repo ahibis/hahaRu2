@@ -47,13 +47,35 @@ body::-webkit-scrollbar-thumb {
     justify-content: center;
 }
 
+.copybutton {
+    padding-top: 100px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
 #userName {
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
 }
 
 #gen {
     margin-top: 24px;
     text-align: center;
+    user-select: none;
+    -webkit-user-select: none;      /* Safari */
+    -webkit-touch-callout: none;    /* Safari (IOS) */
+    -moz-user-select: none;         /* Old versions of Firefox */
+    -ms-user-select: none;          /* Internet Explorer, Edge */
+}
+
+#gen2 {
+    margin-top: 6px;
+    text-align: center;
+    user-select: none;
+    -webkit-user-select: none; /* Safari */
+    -webkit-touch-callout: none; /* Safari (IOS) */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer, Edge */
 }
 
 #funnyword {
@@ -117,6 +139,34 @@ body::-webkit-scrollbar-thumb {
         margin: 0;
     }
 
+#buttonsmall {
+    font-family: Montserrat;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 18px;
+    letter-spacing: 0.2px;
+    color: #373F41;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    background: white;
+    height: 30px;
+    border-radius: 15px;
+    width: 120px;
+    text-align: center;
+    align-items: center;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.25);
+    margin-left: 0px;
+    transition: all .3s ease;
+}
+
+    #buttonsmall:hover {
+        transform: scale3d(0.98, 0.98, 0.98);
+    }
+
+    #buttonsmall:active {
+        transform: scale3d(0.9, 0.9, 0.9);
+    }
+
 .between {
     display: flex;
     justify-content: space-between;
@@ -149,6 +199,13 @@ body::-webkit-scrollbar-thumb {
 
 .header_inner {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+a#userLink.nav_link {
+    display: flex;
+    width: 6vw;
     justify-content: space-between;
     align-items: center;
 }
@@ -203,8 +260,13 @@ a {
     color: #373F41;
     text-decoration: none;
     transition: all .3s linear;
-    display: flex;
+    /*display: flex;*/
     align-content: center;
+    user-select: none;
+    -webkit-user-select: none; /* Safari */
+    -webkit-touch-callout: none; /* Safari (IOS) */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer, Edge */
 }
 
     .nav_link:hover {
