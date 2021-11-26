@@ -55,7 +55,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 #userName {
-    margin-bottom: 10px;
+    /*margin-bottom: 10px;*/
 }
 
 #gen {
@@ -160,7 +160,11 @@ body::-webkit-scrollbar-thumb {
 }
 
     #buttonsmall:hover {
-        transform: scale3d(0.99, 0.99, 0.99);
+        transform: scale3d(0.98, 0.98, 0.98);
+    }
+
+    #buttonsmall:active {
+        transform: scale3d(0.9, 0.9, 0.9);
     }
 
 .between {
@@ -195,6 +199,13 @@ body::-webkit-scrollbar-thumb {
 
 .header_inner {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+a#userLink.nav_link {
+    display: flex;
+    width: 6vw;
     justify-content: space-between;
     align-items: center;
 }
@@ -249,7 +260,7 @@ a {
     color: #373F41;
     text-decoration: none;
     transition: all .3s linear;
-    display: flex;
+    /*display: flex;*/
     align-content: center;
     user-select: none;
     -webkit-user-select: none; /* Safari */

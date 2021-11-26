@@ -29,16 +29,10 @@
     </div>
     <script>
         function CopyText() {
-            var copyText = document.getElementById("#funnywordresult");  /* Get the text field */
-            copyText.select();                                          /* Select the text field */
-            copyText.setSelectionRange(0, 99999);                       /* For mobile devices */
-            navigator.clipboard.writeText(copyText.value);              /* Copy the text inside the text field */
-            alert("Copied the text: " + copyText.value);                /* Alert the copied text */
+            var copyText = document.getElementById("funnywordresult");      /* Get the text field */
+            navigator.clipboard.writeText(copyText.innerText);              /* Copy the text inside the text field */
+            /*alert("Copied the text: " + copyText.innerText);  */             /* Alert the copied text */
         }
-        //function CopyText() {
-        //    navigator.clipboard.readText().then(
-        //        clipText => document.querySelector("funnywordresult").innerText = clipText);
-        //}
     </script>
 </div>
 <script src="{% static '/js/funnyword.js'%}"></script>    

@@ -26,10 +26,12 @@ def RandomString(length):
     return "".join([*map(lambda a:random.choice(chars),range(10))])
 
 def GetURL1():
-    count = 100
+    count = 1
     API_KEY = "AIzaSyBVJ5iH6EhlQ7g_3XQlO4US_ytkbam1kOU";
     q = RandomString(4);
     url = "https://www.googleapis.com/youtube/v3/search?key=" + API_KEY + "&maxResults=" + count + "&part=snippet&type=video&q=" + q;
+    url = "dQw4w9WgXcQ";
+    return url;
 def wordGen():
     i = random.randint(0, 399);
     bonus = [ "Похороны", "Абоба"];
