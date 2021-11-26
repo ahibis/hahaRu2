@@ -16,7 +16,7 @@
             }
         },
         changeDisLike: async function (postId) {
-            let data = await api("changeContentDisLiked", { postId: postId, type:"video" });
+            let data = (await api("changeContentDisLiked", { postId: postId, type:"video" })).data;
             console.log(data)
             if (data.value) {
                 let post = this.Posts.filter(post => post.id == postId)[0]
