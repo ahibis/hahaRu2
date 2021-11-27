@@ -172,3 +172,8 @@ window.addEventListener("scroll", function () {
     const header = document.querySelector('div');
     header.classList.toggle('sticky', window.scrollY >= 10);
 });
+
+function notification() {
+    const notification = document.querySelector('.alert');
+    notification.classList.add("-show");
+}
