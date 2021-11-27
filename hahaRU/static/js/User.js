@@ -2,6 +2,7 @@
     el: "#app",
     delimiters: ["[[", "]]"],
     data: {
+        pageIsExist: true,
         Login: "НЕСУЩЕСТВУЮЩАЯ СТРАНИЦА",
         Date: "2021-04-15",
         Status: "ПОРА ЗАРЕГАТЬСЯ",
@@ -20,6 +21,7 @@
     },
     methods: {
         sendPost:async function() {
+            if (!(ID == 0 || this.id == ID)) return
             console.log(await api("sendPost", { text: this.text}));
             this.text = "";
             let posts = (await api("getPosts", { userId: my.id, offset: 0, count: 1 })).data
@@ -82,6 +84,11 @@ $(document).ready(async function () {
     my = await api("getMy");
     if ((ID!=my.id)&&ID) {
         my = await api("getUser", { id: ID });
+        if(!my.id){
+            vm.pageIsExist = false;
+            $("#app").show()
+            return;
+        }
         $(".Data input").attr("readonly", true)
         $(".Data textarea").attr("readonly", true)
         vm = Object.assign(vm, my);

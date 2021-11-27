@@ -9,3 +9,14 @@ POST http://127.0.0.1:8000/api/getPosts
 content-type: application/x-www-form-urlencoded
 
 userId=1
+###
+
+POST  http://127.0.0.1:8000/api/getUser
+content-type: application/x-www-form-urlencoded
+
+id=5
+
+###
+
+POST  http://127.0.0.1:8000/api/getMy
+content-type: application/x-www-form-urlencoded

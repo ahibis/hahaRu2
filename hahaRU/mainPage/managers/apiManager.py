@@ -15,7 +15,7 @@ def objsToJSON(data):
     return list(map(objToJSON,data))
 
 def getUser(id):
-    user = User.objects.get(pk=id);
+    user = User.objects.get(pk=int(id));
     if not user:
         raise BadRequest("user with this id doesn't defined")
     user.Password=""

@@ -6,7 +6,10 @@ from django.core.files.storage import FileSystemStorage
 class GetUser(View):
     @safe
     def post(self, requests):
-        return JsonResponse(getUser(1))
+        id = 1
+        if "id" in requests.POST:
+            id = requests.POST["id"]
+        return JsonResponse(getUser(id))
 
 class GetMy(View):
     @safe
@@ -54,6 +57,7 @@ class SendPost(View):
 
 
 class SaveAva(View):
+    @safe
     @isAuth
     def post(self, requests, id):
         files=requests.FILES;
