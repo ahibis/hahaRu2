@@ -2,6 +2,7 @@ from django.views.generic import View
 from django.http.response import JsonResponse
 from .managers.apiManager import *
 from .exeptions import safe, isAuth
+from django.core.files.storage import FileSystemStorage
 class GetUser(View):
     @safe
     def post(self, requests):
@@ -50,3 +51,10 @@ class SendPost(View):
     @isAuth
     def post(self, requests, id):
         return JsonResponse(sendPost(requests.POST,id))
+
+
+class SaveAva(View):
+    @isAuth
+    def post(self, requests, id):
+        files=requests.FILES;
+        return JsonResponse(sendAva(files, id))
