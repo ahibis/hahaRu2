@@ -11,4 +11,5 @@ urlpatterns = [
     path("getRandomMemText", GetRundomMemText.as_view()),
     path("getRandomVideo", GetRundomVideo.as_view()),
     path("sendPost", SendPost.as_view()),
+    path("saveAva", SaveAva.as_view())
 ]

@@ -3,6 +3,8 @@ from ..exeptions import AuthError, BadRequest
 from ..models import *
 from datetime import date
 from random import randint
+from django.core.files.storage import FileSystemStorage
+import uuid
 
 def objToJSON(data):
     json=data.__dict__
@@ -13,7 +15,7 @@ def objsToJSON(data):
     return list(map(objToJSON,data))
 
 def getUser(id):
-    user = User.objects.get(pk=id);
+    user = User.objects.get(pk=int(id));
     if not user:
         raise BadRequest("user with this id doesn't defined")
     user.Password=""
@@ -120,4 +122,24 @@ def sendPost(data,id):
     post = Post(text=data["text"],userId=id)
     post.save()
     return {"status":"ok","text":"ok"}
+
+def sendAva(files,id):
+    if not len(files):
+        raise BadRequest("картинка не найдена")
+    availableTypes = {"image/jpeg","image/jpg","image/png"}
+    path = ""
+    for i in files:
+        file = files[i]
+        if not file.content_type in availableTypes:
+            raise BadRequest("поддерживаются аватарки только в jpg, jpeg, png формате")
+        fs = FileSystemStorage()
+        names = file.name.split(".");
+        type = names[-1];
+        name = str(uuid.uuid1())+"."+type;
+        filename = fs.save("hahaRU/static/img/avaImgs/"+ name, file)
+        user = User.objects.get(pk = id);
+        path = "/static/img/avaImgs/"+name
+        user.AvatarSrc = path;
+        user.save()
+    return {"status":"ok","value": path}
 

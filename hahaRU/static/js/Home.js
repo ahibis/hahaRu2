@@ -29,11 +29,11 @@
 })
 let lastPost = 0;
 async function load() {
-    let posts = await api("getPosts", { Offset: lastPost, Count: 20 });
+    let posts = (await api("getPosts", { offset: lastPost, count: 20 })).data;
     lastPost += posts.length;
-    for (Post of posts) {
-        if (!vm.Users[Post.userId])
-            vm.Users[Post.userId] = JSON.parse(await api("getUser", { id: Post.userId })); 
+    for (post of posts) {
+        if (!vm.Users[post.userId])
+            vm.Users[post.userId] = await api("getUser", { id: post.userId }); 
     }
     vm.Posts = [...vm.Posts,...posts];
 }
