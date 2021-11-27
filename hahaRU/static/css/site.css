@@ -14,8 +14,8 @@
 
 body::-webkit-scrollbar {
     width: 0.8vw;
-    /*background: linear-gradient(#ffe66b, #FFC15F);*/
-    background-color: #ffc65d;
+    background: linear-gradient(#ffe66b, #FFC15F);
+    /*background-color: #ffc65d;*/
 }
 
 body::-webkit-scrollbar-thumb {
@@ -132,6 +132,7 @@ body::-webkit-scrollbar-thumb {
     box-shadow: 2px 2px 4px rgba(0,0,0,0.25);
     margin-left: 0px;
     transition: all .3s ease;
+    cursor: pointer;
 }
 
     #button:hover {
@@ -160,6 +161,7 @@ body::-webkit-scrollbar-thumb {
     box-shadow: 2px 2px 4px rgba(0,0,0,0.25);
     margin-left: 0px;
     transition: all .3s ease;
+    cursor: pointer;
 }
 
     #buttonsmall:hover {
@@ -172,7 +174,13 @@ body::-webkit-scrollbar-thumb {
 
 .between {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
+}
+
+.between2 {
+    padding-left: 54vw;
+    display: flex;
+    justify-content: space-evenly;
 }
 
 .left {
@@ -297,7 +305,7 @@ a {
 
 .alert {
     position: -webkit-sticky; /* for Safari */
-    position: sticky;
+    position: fixed;
     width: 100%;
     bottom: 0px;
     padding: 20px;

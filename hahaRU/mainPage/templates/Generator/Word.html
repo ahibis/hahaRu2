@@ -12,8 +12,8 @@
         <p id="funnywordresult">{{ word }}</p>
     </div>
     <div class="copybutton">
-        <div id="buttonsmall">
-            <p id="gen2" button onclick="CopyText()">Копировать</p>
+        <div id="buttonsmall" button onclick="CopyText()">
+            <p id="gen2">Копировать</p>
         </div>
     </div>
     <div style="height:200px"></div>
@@ -21,7 +21,7 @@
         <div class="inner">
             <div class="date">[[post.date]]</div>
             <div class="anekdot">[[post.text]]</div>
-            <div class="between">
+            <div class="between2">
                 <div class="like" v-on:click="changeLike(post.id)" :id="post.id">[[post.likesCount]]<img src="{% static '/img/Like 1.png'%}" class="like1"></div>
                 <div class="dislike" v-on:click="changeDisLike(post.id)" :id="post.id">[[post.dislikesCount]]<img src="{% static '/img/Like 2.png'%}" class="dislike1"></div>
             </div>
@@ -34,7 +34,7 @@
             /*alert("Copied the text: " + copyText.innerText);  */             /* Alert the copied text */
             //const notification = document.querySelector('.alert');
             //notification.classList.add("-show");
-            notification();
+            notification("Слово скопировано!");
         }
     </script>
 </div>

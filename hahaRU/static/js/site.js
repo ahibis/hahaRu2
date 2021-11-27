@@ -43,7 +43,8 @@ function registration() {
     })
     post("Registration/Registration", form).then(r => {
         console.log(r);
-        $("#message").text(r.text)
+        /*$("#message").text(r.text)*/
+        notification(r.text);
         if(r.status=="ok") location.href="/"
     })
 }
@@ -56,10 +57,19 @@ function login() {
     })
     post("Auth/Login", form).then(r => {
         console.log(r);
-        $("#message").text(r.text)
+        //$("#message").text(r.text)
+        notification(r.text);
         if (r.status == "ok") location.href = "/"
     })
 }
+
+function notification(text) {
+    $("#message").text(text)
+    const notification = document.querySelector('.alert');
+    notification.classList.add("-show");
+    setTimeout(() => notification.classList.remove("-show"), 4000);
+}
+
 my = {};
 $(document).ready(async function () {
     my = await api("getMy");
@@ -172,8 +182,3 @@ window.addEventListener("scroll", function () {
     const header = document.querySelector('div');
     header.classList.toggle('sticky', window.scrollY >= 10);
 });
-
-function notification() {
-    const notification = document.querySelector('.alert');
-    notification.classList.add("-show");
-}
