@@ -31,7 +31,7 @@ def isAuth(func):
     def decorator(self, requests, *args,**kargs):
         if not "id" in requests.session.keys():
             raise AuthError();
-        return func(self, requests, requests.session["id"], *args,  **kargs)
+        return func(self, requests, int(requests.session["id"]), *args,  **kargs)
     return decorator
 
 def check(model:models.Model):

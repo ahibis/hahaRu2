@@ -1,4 +1,3 @@
-
 class IdList:
     def __init__(self,ids=""):
         if (ids == None):
@@ -8,8 +7,8 @@ class IdList:
     def BinarySearch(self,array="",searchedValue=0,first=0,last=0):
         if first > last:
             return -1
-        middle = int((first + last) / 2)
-        middleValue = int(array[middle])
+        middle = (first + last) // 2
+        middleValue = ord(array[middle])
         if middleValue == searchedValue:
             return middle
         else:
@@ -21,8 +20,8 @@ class IdList:
     def BinarySearchPut(self, array="", searchedValue=0, first=0, last=0):
         if first > last:
             return first
-        middle = int((first + last) / 2)
-        middleValue = int(array[middle])
+        middle = (first + last) // 2
+        middleValue = ord(array[middle])
         if middleValue == searchedValue:
             return -1
         else:
@@ -45,7 +44,7 @@ class IdList:
     def toList(self):
         l = []
         for a in self._ids:
-            l.append(a)
+            l.append(ord(a))
         return l
 
     def toString(self):

@@ -1,15 +1,16 @@
 from django.urls import path
-from .apis import *
+from . import apis 
+from django.views.generic import View
 
-urlpatterns = [
-    path("getUser", GetUser.as_view()),
-    path("getMy", GetMy.as_view()),
-    path("updateUser", UpdateUser.as_view()),
-    path("getContents", GetContents.as_view()),
-    path("getPosts", GetPosts.as_view()),
-    path("getRandomMemImg", GetRundomMemImg.as_view()),
-    path("getRandomMemText", GetRundomMemText.as_view()),
-    path("getRandomVideo", GetRundomVideo.as_view()),
-    path("sendPost", SendPost.as_view()),
-    path("saveAva", SaveAva.as_view())
-]
+patterns = []
+
+for el in apis.__dict__.items():
+    key = el[0]
+    value = el[1]
+    if key == "View":
+        continue
+    if not "as_view" in dir(value):
+        continue
+    patterns.append(path(key[0].lower() + key[1:], value.as_view()))
+
+urlpatterns = patterns

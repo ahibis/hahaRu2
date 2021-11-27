@@ -21,7 +21,7 @@
             if (data.value) {
                 let post = this.Posts.filter(post => post.id == postId)[0]
                 post.isDisliked = data.value.isDisliked;
-                post.dislikesCount = data.value.dislikesCount
+                post.disLikesCount = data.value.disLikesCount
             }
         }
     }

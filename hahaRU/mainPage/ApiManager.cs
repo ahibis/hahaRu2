@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 
 namespace hahaRU.Managers
 {
-    public class ApiManager: IApiManager
+    public class ApiManager : IApiManager
     {
         private Context _context;
 
@@ -124,7 +124,7 @@ namespace hahaRU.Managers
         public object changeDisLiked(int postId, HttpContext httpContext)
         {
             int? id = httpContext.Session.GetInt32("id");
-            if (id == null) return new JsonStatus() { status = "error", text = "вы не зарегестрированы" };
+            if (id == null) return new JsonStatus() { status = "error", text = "вы не зарегистрированы" };
             List<Post> posts = _context.Posts.Where(post => post.Id == postId).ToList();
             if (posts.Count == 0) return new JsonStatus() { status = "error", text = "post не существует" };
             Post post = posts[0];
@@ -142,7 +142,9 @@ namespace hahaRU.Managers
                 post.DislikesCount++;
             }
             _context.SaveChanges();
-            return new JsonStatus() { status = "ok", 
+            return new JsonStatus()
+            {
+                status = "ok",
                 text = "все окей",
                 value = new PostData()
                 {
@@ -156,12 +158,12 @@ namespace hahaRU.Managers
         public object changeLiked(int postId, HttpContext httpContext)
         {
             int? id = httpContext.Session.GetInt32("id");
-            if (id == null) return new JsonStatus() { status = "error", text = "вы не зарегестрированы" };
+            if (id == null) return new JsonStatus() { status = "error", text = "вы не зарегистрированы" };
             List<Post> posts = _context.Posts.Where(post => post.Id == postId).ToList();
-            if(posts.Count==0) return new JsonStatus() { status = "error", text = "post не существует" };
+            if (posts.Count == 0) return new JsonStatus() { status = "error", text = "post не существует" };
             Post post = posts[0];
             IdList likes = new IdList(post.Likes);
-            if(likes.hasId((int)id))
+            if (likes.hasId((int)id))
             {
                 likes.removeId((int)id);
                 post.Likes = likes.toString();
@@ -174,14 +176,16 @@ namespace hahaRU.Managers
                 post.LikesCount++;
             }
             _context.SaveChanges();
-            return new JsonStatus() { 
-                status = "ok", 
-                text = "все окей", 
-                value = new PostData() {
-                    IsLiked= likes.hasId((int)id)?1:0,
-                    LikesCount= post.LikesCount,
-                    Id=post.Id
-                } 
+            return new JsonStatus()
+            {
+                status = "ok",
+                text = "все окей",
+                value = new PostData()
+                {
+                    IsLiked = likes.hasId((int)id) ? 1 : 0,
+                    LikesCount = post.LikesCount,
+                    Id = post.Id
+                }
             };
         }
 
@@ -216,7 +220,7 @@ namespace hahaRU.Managers
                     Text = post.Text,
                     Date = post.Date,
                     ImgSrc = post.ImgSrc,
-                    VideoSrc=post.VideoSrc,
+                    VideoSrc = post.VideoSrc,
                     IsLiked = (new IdList(post.Likes)).hasId((int)id) ? 1 : 0,
                     IsDisLiked = (new IdList(post.Dislikes)).hasId((int)id) ? 1 : 0,
                     LikesCount = post.LikesCount,
@@ -228,18 +232,18 @@ namespace hahaRU.Managers
 
         public object getPosts(getPostReq data, HttpContext httpContext)
         {
-            int count= data.Count ?? 20;
+            int count = data.Count ?? 20;
             int offset = data.Offset ?? 0;
             int? id = httpContext.Session.GetInt32("id");
-            id = (id==null)?0:id;
+            id = (id == null) ? 0 : id;
             List<Post> posts;
             if (data.UserId == null)
-                posts= _context.Posts.OrderByDescending(x => x.LikesCount).Skip(offset).Take(count).ToList();
+                posts = _context.Posts.OrderByDescending(x => x.LikesCount).Skip(offset).Take(count).ToList();
             else
                 posts = _context.Posts.Where(e => e.UserId == data.UserId).OrderByDescending(x => x.Id).Skip(offset).Take(count).ToList();
 
             List<PostData> Posts = new List<PostData>();
-            foreach(Post post in posts)
+            foreach (Post post in posts)
             {
                 Posts.Add(new PostData()
                 {
@@ -248,10 +252,10 @@ namespace hahaRU.Managers
                     Date = post.Date,
                     UserId = post.UserId,
                     ImgSrc = post.ImgSrc,
-                    IsLiked = (new IdList(post.Likes)).hasId((int)id) ? 1: 0,
+                    IsLiked = (new IdList(post.Likes)).hasId((int)id) ? 1 : 0,
                     IsDisLiked = (new IdList(post.Dislikes)).hasId((int)id) ? 1 : 0,
-                    LikesCount=post.LikesCount,
-                    DislikesCount=post.DislikesCount
+                    LikesCount = post.LikesCount,
+                    DislikesCount = post.DislikesCount
                 });
             }
             return Posts;
@@ -267,7 +271,7 @@ namespace hahaRU.Managers
             int count = _context.memPictures.Count();
             if (count == 0) return new JsonStatus() { status = "error", text = "нет изображений" };
             Random rnd = new Random();
-            int id = rnd.Next(1, count+1);
+            int id = rnd.Next(1, count + 1);
             memPictures mem = _context.memPictures.Where(mem => mem.Id == id).First();
             return new JsonStatus() { status = "ok", value = mem };
         }
@@ -277,9 +281,9 @@ namespace hahaRU.Managers
             int count = _context.memTexts.Count();
             if (count == 0) return new JsonStatus() { status = "error", text = "нет текстов" };
             Random rnd = new Random();
-            int id = rnd.Next(1, count+1);
+            int id = rnd.Next(1, count + 1);
             memText mem = _context.memTexts.Where(mem => mem.Id == id).First();
-            return new JsonStatus() { status = "ok", value=mem };
+            return new JsonStatus() { status = "ok", value = mem };
         }
 
         public object getRundomVideo()
@@ -319,16 +323,16 @@ namespace hahaRU.Managers
             int? id = httpContext.Session.GetInt32("id");
             if (id == null) return new JsonStatus() { status = "error", text = "Вы не авторизовались" };
             string path = "";
-            if(files.Count==0) return new JsonStatus() { status = "error", text = "Картинка не найдена" };
+            if (files.Count == 0) return new JsonStatus() { status = "error", text = "Картинка не найдена" };
             var file = files[0];
             path = "/img/avaImgs/" + file.FileName;
-                using (var fileStream = new FileStream(webRootPath + path, FileMode.Create))
-                {
-                    file.CopyTo(fileStream);
-                }
-                memPictures pic = new memPictures() { ImgSrc = file.FileName };
+            using (var fileStream = new FileStream(webRootPath + path, FileMode.Create))
+            {
+                file.CopyTo(fileStream);
+            }
+            memPictures pic = new memPictures() { ImgSrc = file.FileName };
             User user = _context.Users.Single(user => user.Id == (int)id);
-            if(user==null) return new JsonStatus() { status = "error", text = "Вы не авторизовались 2" };
+            if (user == null) return new JsonStatus() { status = "error", text = "Вы не авторизовались 2" };
             user.AvatarSrc = path;
             _context.SaveChanges();
             return new JsonStatus() { status = "ok", value = path };
@@ -358,12 +362,12 @@ namespace hahaRU.Managers
             Mem mem = new Mem() { ImgSrc = path };
             _context.Mems.Add(mem);
             _context.SaveChanges();
-            return new JsonStatus() { status = "ok",value=mem };
+            return new JsonStatus() { status = "ok", value = mem };
         }
 
         public object saveMemPic(IFormFileCollection files, string webRootPath)
         {
-            string path="";
+            string path = "";
             foreach (var file in files)
             {
                 path = "/img/memImgs/" + file.FileName;
@@ -375,10 +379,10 @@ namespace hahaRU.Managers
                 _context.memPictures.Add(pic);
                 _context.SaveChanges();
             }
-           return new JsonStatus() { status = "ok", value = path };
+            return new JsonStatus() { status = "ok", value = path };
         }
-            
-        
+
+
 
         public object sendPost(Post post, HttpContext httpContext)
         {
@@ -394,15 +398,15 @@ namespace hahaRU.Managers
             };
             _context.Posts.Add(post1);
             _context.SaveChanges();
-            return new JsonStatus() { status="ok",text="ok"};
+            return new JsonStatus() { status = "ok", text = "ok" };
         }
 
         public string updateUser(User user, HttpContext httpContext)
         {
-            if (user.Id==0) return "Id is not find";
+            if (user.Id == 0) return "Id is not find";
             int? id = httpContext.Session.GetInt32("id");
-            if(id==null) return "Your doesn't auth";
-            if(id!=user.Id) return "нельзя изменять чужой аккаунт";
+            if (id == null) return "Your doesn't auth";
+            if (id != user.Id) return "нельзя изменять чужой аккаунт";
             User userNew = _context.Users
                 .Where(c => c.Id == id)
                 .First();
@@ -418,6 +422,6 @@ namespace hahaRU.Managers
             return "ok";
         }
 
-        
+
     }
 }

@@ -1,14 +1,15 @@
 from typing import Match
+
 from ..exeptions import AuthError, BadRequest
 from ..models import *
 from datetime import date
 from random import randint
 from django.core.files.storage import FileSystemStorage
 import uuid
-from ..moduls import IdList
-from ..exeptions import safe, isAuth
+from ..moduls.IdList import IdList
 from django.http.response import JsonResponse
-
+from base64 import decodestring
+from django.core.files.base import ContentFile
 
 def objToJSON(data):
     json=data.__dict__
@@ -148,110 +149,140 @@ def sendAva(files,id):
         user.save()
     return {"status":"ok","value": path}
 
-@isAuth
-def changeContentDisLiked(postId,type,requests,id):
-    data = requests.POST
-    post = None
-    if not id in data:
-        raise BadRequest("Вы не указали поле id")
+def saveMemPic(files):
+    if not len(files):
+        raise BadRequest("картинка не найдена")
+    availableTypes = {"image/jpeg","image/jpg","image/png"}
+    path = ""
+    for i in files:
+        file = files[i]
+        if not file.content_type in availableTypes:
+            raise BadRequest("поддерживаются аватарки только в jpg, jpeg, png формате")
+        fs = FileSystemStorage()
+        names = file.name.split(".");
+        type = names[-1];
+        name = str(uuid.uuid1())+"."+type;
+        filename = fs.save("hahaRU/static/img/memImgs/"+ name, file)
+        path = name
+        memPic = MemPicture(imgSrc= name)
+        memPic.save()
+    return {"status":"ok","value": path}    
 
+def saveMem(data):
+    if not "imgBase64" in data:
+        raise BadRequest("не передан imgBase64")
+    count = Mem.objects.count();
+    path = f"/static/img/memGenerated/img{count}.png"
+    with open("hahaRU"+path, "wb") as fs:
+        fs.write(decodestring(str.encode(data["imgBase64"])))
+    mem = Mem(imgSrc = path)
+    mem.save();
+    return {"status" : "ok", "value" : objToJSON(mem)}
+
+def changeContentDisLiked(data,id):
+    if not "postId" in data:
+        raise BadRequest("Вы не указали поле postId")
+    if not "type" in data:
+        raise BadRequest("Вы не указали поле type")   
+    post = None    
     if data["type"] == "mem":
-        objs = objToJSON(Mem.objects.get(id=data["id"]))
+        post = Mem.objects.get(id=data["postId"])
     elif data["type"] == "funnyWord":
-        objs = objToJSON(FunnyWord.objects.get(id=data["id"]))
+        post = FunnyWord.objects.get(id=data["postId"])
     elif data["type"] == "video":
-        objs = objToJSON(Video.objects.get(id=data["id"]))
+        post = Video.objects.get(id=data["postId"])
     else:
-        objs = objToJSON(Anecdot.objects.get(id=data["id"]))
-    if (data["type"] == None):
-        dictionary = {"status" : "error", "text" : "post не существует"}
-        return JsonResponse(dictionary)
-    likes = IdList(post.Dislikes)
-    if int(id) in likes:
-        likes.removeId(int(id))
-        post.Dislikes = likes.toString()
-        post.DislikesCount=-1
+        post = Anecdot.objects.get(id=data["postId"])
+    likes = IdList(post.disLikes)
+
+    if likes.hasId(id):
+        likes.removeId(id)
+        post.disLikes = likes.toString()
+        post.disLikesCount-=1
     else:
-        likes.AddId(int(id))
-        post.Dislikes = likes.toString()
-        post.DislikesCount+=1
+        likes.AddId(id)
+        post.disLikes = likes.toString()
+        post.disLikesCount+=1
     post.save()
-    status = {"status" : "ok","text" : "все окей","value" : {"IsDisLiked" : 1 if likes.hasId(int(id)) else 0,"DislikesCount" : post.dislikesCount, "Id" : post.id }}
-    return JsonResponse(status)
+    
+    return {
+        "status" : "ok",
+        "text" : "все окей",
+        "value" : {"isDisLiked" : 1 if likes.hasId(id) else 0,"disLikesCount" : post.disLikesCount, "id" : post.id }
+    }
 
-@isAuth
-def changeContentLiked(postId,type,requests,id):
-    data = requests.POST
-    post = None
-    if not id in data:
-        raise BadRequest("Вы не указали поле id")
-
+def changeContentLiked(data,id):
+    if not "postId" in data:
+        raise BadRequest("Вы не указали поле postId")
+    if not "type" in data:
+        raise BadRequest("Вы не указали поле type")   
+    post = None    
     if data["type"] == "mem":
-        objs = objToJSON(Mem.objects.get(id=data["id"]))
+        post = Mem.objects.get(id=data["postId"])
     elif data["type"] == "funnyWord":
-        objs = objToJSON(FunnyWord.objects.get(id=data["id"]))
+        post = FunnyWord.objects.get(id=data["postId"])
     elif data["type"] == "video":
-        objs = objToJSON(Video.objects.get(id=data["id"]))
+        post = Video.objects.get(id=data["postId"])
     else:
-        objs = objToJSON(Anecdot.objects.get(id=data["id"]))
-    if (data["type"] == None):
-        dictionary = {"status" : "error", "text" : "post не существует"}
-        return JsonResponse(dictionary)
-    likes = IdList(post.Likes)
-    if int(id) in likes:
-        likes.removeId(int(id))
-        post.Likes = likes.toString()
-        post.LikesCount=-1
+        post = Anecdot.objects.get(id=data["postId"])
+    likes = IdList(post.likes)
+    if likes.hasId(id):
+        likes.removeId(id)
+        post.likes = likes.toString()
+        post.likesCount-=1
     else:
-        likes.AddId(int(id))
-        post.Likes = likes.toString()
-        post.LikesCount+= 1
+        likes.AddId(id)
+        post.likes = likes.toString()
+        post.likesCount+= 1
     post.save()
-    status = {"status": "ok", "text": "все окей","value": {"IsLiked": 1 if likes.hasId(int(id)) else 0, "LikesCount": post.likesCount,"Id": post.id}}
-    return JsonResponse(status)
+    return {
+        "status": "ok", 
+        "text": "все окей",
+        "value": {"isLiked": 1 if likes.hasId(id) else 0, "likesCount": post.likesCount,"id": post.id}
+    }
 
 
-@isAuth
-def changeDisLiked(postId,requests,id):
-    data = requests.POST
-    posts = objsToJSON(Posts.objects.all())
-    if (len(posts) == 0):
-        dictionary = {"status": "error", "text": "post не существует"}
-        return JsonResponse(dictionary)
-    post = posts[0]
-    likes = IdList(post.Dislikes)
-    if int(id) in likes:
-        likes.removeId(int(id))
-        post.Dislikes = likes.toString()
-        post.DislikesCount=-1
-    else:
-        likes.AddId(int(id))
-        post.Dislikes = likes.toString()
-        post.DislikesCount+=1
-    post.save()
-    status = {"status": "ok", "text": "все окей",
-              "value": {"IsLiked": 1 if likes.hasId(int(id)) else 0, "LikesCount": post.likesCount, "Id": post.id}}
-    return JsonResponse(status)
 
-@isAuth
-def changeLiked(postId,requests,id):
-    data = requests.POST
-    posts = objsToJSON(Posts.objects.all())
-    if (len(posts) == 0):
-        dictionary = {"status": "error", "text": "post не существует"}
-        return JsonResponse(dictionary)
-    post = posts[0]
-    likes = IdList(post.Likes)
-    if int(id) in likes:
-        likes.removeId(int(id))
-        post.Likes = likes.toString()
-        post.LikesCount=-1
+def changeDisLiked(data,id):
+    if not "postId" in data:
+        raise BadRequest("Вы не указали поле postId")
+    post = Post.objects.get(pk= data["postId"])
+    likes = IdList(post.disLikes)
+    if likes.hasId(id):
+        likes.removeId(id)
+        post.disLikes = likes.toString()
+        post.disLikesCount -= 1
     else:
-        likes.AddId(int(id))
-        post.Likes = likes.toString()
-        post.LikesCount+= 1
+        likes.AddId(id)
+        post.disLikes = likes.toString()
+        post.disLikesCount+= 1
     post.save()
-    status = {"status": "ok", "text": "все окей","value": {"IsLiked": 1 if likes.hasId(int(id)) else 0, "LikesCount": post.likesCount,"Id": post.id}}
-    return JsonResponse(status)
+    return {
+        "status": "ok", 
+        "text": "все окей",
+        "value": {"isDisLiked": 1 if likes.hasId(id) else 0, "disLikesCount": post.disLikesCount, "id": post.id}
+    }
+
+
+def changeLiked(data,id):
+    if not "postId" in data:
+        raise BadRequest("Вы не указали поле postId")
+    post = Post.objects.get(pk= data["postId"])
+    likes = IdList(post.likes)
+    if likes.hasId(id):
+        likes.removeId(id)
+        post.likes = likes.toString()
+        post.likesCount-= 1
+    else:
+        likes.AddId(id)
+        post.likes = likes.toString()
+        post.likesCount+= 1
+    post.save()
+    
+    return {
+        "status": "ok", 
+        "text": "все окей",
+        "value": {"isLiked": 1 if likes.hasId(id) else 0, "likesCount": post.likesCount,"id": post.id}
+    }
 
 

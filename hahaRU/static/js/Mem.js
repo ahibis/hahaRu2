@@ -26,7 +26,7 @@
             if (data.value) {
                 let post = this.Posts.filter(post => post.id == postId)[0]
                 post.isDisliked = data.value.isDisliked;
-                post.dislikesCount = data.value.dislikesCount
+                post.disLikesCount = data.value.disLikesCount
             }
         },
         input:async function(){
@@ -46,7 +46,7 @@
         pictureLoad:async function(i){
             let data=await sendFiles("/api/saveMemPic");
             if(data.value)
-                vm.imgs[i].src=data.value;
+                vm.imgs[i].src="/static/img/memImgs/"+data.value;
             await generator.draw()
         }
     }
@@ -126,8 +126,8 @@ class MemGenerator{
     async getRandomImg(){
         let data=await api("getRandomMemImg");
             if(data.value)
-                return '/img/memImgs/'+data.value.imgSrc;
-            return '/img/memImgs/Putin.jpg'
+                return '/static/img/memImgs/'+data.value.imgSrc;
+            return '/static/img/memImgs/Putin.jpg'
 
     }
     async addText(){
@@ -203,16 +203,16 @@ class MemGenerator{
         return this._width
     }
     set width(w){
-         this._width=w;
-         this.el.width=w;
+        this._width=w;
+        this.el.width=w;
     }
     get height(){
         return this._height;
     }
     set height(w){
         this._height=w;
-         this.el.height=w;
-         generator.el.style.height=w;
+        this.el.height=w;
+        generator.el.style.height=w;
     }
     canvasToImg(ctx) {
         let src = ctx.toDataURL();

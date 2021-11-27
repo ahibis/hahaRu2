@@ -41,7 +41,7 @@
             console.log(data)
             if (data.value) {
                 let post = this.Posts.filter(post => post.id == postId)[0]
-                post.isLiked = data.value.isliked;
+                post.isLiked = data.value.isLiked;
                 post.likesCount = data.value.likesCount
             }
         },
@@ -50,8 +50,8 @@
             console.log(data)
             if (data.value) {
                 let post = this.Posts.filter(post => post.id == postId)[0]
-                post.isDisliked = data.value.isDisliked;
-                post.dislikesCount = data.value.dislikesCount
+                post.isDisliked = data.value.isDisLiked;
+                post.disLikesCount = data.value.disLikesCount
             }
         },
         getImg(){

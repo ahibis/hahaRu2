@@ -34,17 +34,17 @@ class GetPosts(View):
     def post(self, requests):
         return JsonResponse(getPosts(requests.POST))
 
-class GetRundomMemImg(View):
+class GetRandomMemImg(View):
     @safe
     def post(self, requests):
         return JsonResponse(getRandomMemImg())
 
-class GetRundomMemText(View):
+class GetRandomMemText(View):
     @safe
     def post(self, requests):
         return JsonResponse(getRandomMemText())
 
-class GetRundomVideo(View):
+class GetRandomVideo(View):
     @safe
     def post(self, requests):
         return JsonResponse(getRandomVideo())
@@ -60,5 +60,36 @@ class SaveAva(View):
     @safe
     @isAuth
     def post(self, requests, id):
-        files=requests.FILES;
-        return JsonResponse(sendAva(files, id))
+        return JsonResponse(sendAva(requests.FILES, id))
+
+class ChangeContentDisLiked(View):
+    @safe
+    @isAuth
+    def post(self, requests, id):
+        return JsonResponse(changeContentDisLiked(requests.POST,id))
+
+class ChangeContentLiked(View):
+    @safe
+    @isAuth
+    def post(self, requests, id):
+        return JsonResponse(changeContentLiked(requests.POST,id))
+
+class ChangeDisLiked(View):
+    @safe
+    @isAuth
+    def post(self, requests, id):
+        return JsonResponse(changeDisLiked(requests.POST,id))
+class ChangeLiked(View):
+    @safe
+    @isAuth
+    def post(self, requests, id):
+        return JsonResponse(changeLiked(requests.POST,id))
+
+class SaveMemPic(View):
+    @safe
+    def post(self, requests):
+        return JsonResponse(saveMemPic(requests.FILES))
+
+class SaveMem(View):
+    def post(self, requests):
+        return JsonResponse(saveMem(requests.POST))
