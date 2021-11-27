@@ -3,6 +3,7 @@ from ..exeptions import AuthError, BadRequest
 from ..models import *
 from datetime import date
 from random import randint
+from ..moduls import IdList
 
 def objToJSON(data):
     json=data.__dict__
