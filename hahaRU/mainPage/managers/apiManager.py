@@ -4,6 +4,8 @@ from ..models import *
 from datetime import date
 from random import randint
 from ..moduls import IdList
+from ..exeptions import safe, isAuth
+from django.http.response import JsonResponse
 
 def objToJSON(data):
     json=data.__dict__
@@ -121,4 +123,110 @@ def sendPost(data,id):
     post = Post(text=data["text"],userId=id)
     post.save()
     return {"status":"ok","text":"ok"}
+
+@isAuth
+def changeContentDisLiked(postId,type,requests,id):
+    data = requests.POST
+    post = None
+    if not id in data:
+        raise BadRequest("Вы не указали поле id")
+
+    if data["type"] == "mem":
+        objs = objToJSON(Mem.objects.get(id=data["id"]))
+    elif data["type"] == "funnyWord":
+        objs = objToJSON(FunnyWord.objects.get(id=data["id"]))
+    elif data["type"] == "video":
+        objs = objToJSON(Video.objects.get(id=data["id"]))
+    else:
+        objs = objToJSON(Anecdot.objects.get(id=data["id"]))
+    if (data["type"] == None):
+        dictionary = {"status" : "error", "text" : "post не существует"}
+        return JsonResponse(dictionary)
+    likes = IdList(post.Dislikes)
+    if int(id) in likes:
+        likes.removeId(int(id))
+        post.Dislikes = likes.toString()
+        post.DislikesCount=-1
+    else:
+        likes.AddId(int(id))
+        post.Dislikes = likes.toString()
+        post.DislikesCount+=1
+    post.save()
+    status = {"status" : "ok","text" : "все окей","value" : {"IsDisLiked" : 1 if likes.hasId(int(id)) else 0,"DislikesCount" : post.dislikesCount, "Id" : post.id }}
+    return JsonResponse(status)
+
+@isAuth
+def changeContentLiked(postId,type,requests,id):
+    data = requests.POST
+    post = None
+    if not id in data:
+        raise BadRequest("Вы не указали поле id")
+
+    if data["type"] == "mem":
+        objs = objToJSON(Mem.objects.get(id=data["id"]))
+    elif data["type"] == "funnyWord":
+        objs = objToJSON(FunnyWord.objects.get(id=data["id"]))
+    elif data["type"] == "video":
+        objs = objToJSON(Video.objects.get(id=data["id"]))
+    else:
+        objs = objToJSON(Anecdot.objects.get(id=data["id"]))
+    if (data["type"] == None):
+        dictionary = {"status" : "error", "text" : "post не существует"}
+        return JsonResponse(dictionary)
+    likes = IdList(post.Likes)
+    if int(id) in likes:
+        likes.removeId(int(id))
+        post.Likes = likes.toString()
+        post.LikesCount=-1
+    else:
+        likes.AddId(int(id))
+        post.Likes = likes.toString()
+        post.LikesCount+= 1
+    post.save()
+    status = {"status": "ok", "text": "все окей","value": {"IsLiked": 1 if likes.hasId(int(id)) else 0, "LikesCount": post.likesCount,"Id": post.id}}
+    return JsonResponse(status)
+
+
+@isAuth
+def changeDisLiked(postId,requests,id):
+    data = requests.POST
+    posts = objsToJSON(Posts.objects.all())
+    if (len(posts) == 0):
+        dictionary = {"status": "error", "text": "post не существует"}
+        return JsonResponse(dictionary)
+    post = posts[0]
+    likes = IdList(post.Dislikes)
+    if int(id) in likes:
+        likes.removeId(int(id))
+        post.Dislikes = likes.toString()
+        post.DislikesCount=-1
+    else:
+        likes.AddId(int(id))
+        post.Dislikes = likes.toString()
+        post.DislikesCount+=1
+    post.save()
+    status = {"status": "ok", "text": "все окей",
+              "value": {"IsLiked": 1 if likes.hasId(int(id)) else 0, "LikesCount": post.likesCount, "Id": post.id}}
+    return JsonResponse(status)
+
+@isAuth
+def changeLiked(postId,requests,id):
+    data = requests.POST
+    posts = objsToJSON(Posts.objects.all())
+    if (len(posts) == 0):
+        dictionary = {"status": "error", "text": "post не существует"}
+        return JsonResponse(dictionary)
+    post = posts[0]
+    likes = IdList(post.Likes)
+    if int(id) in likes:
+        likes.removeId(int(id))
+        post.Likes = likes.toString()
+        post.LikesCount=-1
+    else:
+        likes.AddId(int(id))
+        post.Likes = likes.toString()
+        post.LikesCount+= 1
+    post.save()
+    status = {"status": "ok", "text": "все окей","value": {"IsLiked": 1 if likes.hasId(int(id)) else 0, "LikesCount": post.likesCount,"Id": post.id}}
+    return JsonResponse(status)
 
