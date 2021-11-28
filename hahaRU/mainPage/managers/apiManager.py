@@ -267,9 +267,9 @@ def loadImg(files,id):
         names = file.name.split(".");
         type = names[-1];
         name = str(uuid.uuid1())+"."+type;
-        filename = fs.save("hahaRU/static/img/avaImgs/"+ name, file)
+        filename = fs.save("hahaRU/static/img/UserImgs/"+ name, file)
         user = User.objects.get(pk = id);
-        path = "/static/img/avaImgs/"+name
-        user.AvatarSrc = path;
+        path = "/static/img/UserImgs/"+name
+        user.UserSrc = path; # здесь необходимо создать новое поле для загруженных пользователем картинок на стену
         user.save()
     return {"status":"ok","value": path}
