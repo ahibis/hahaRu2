@@ -1,6 +1,7 @@
 {% extends 'Layout2.html' %}
 {% load static %}
 {% block content %}
+{% load account socialaccount %}
 <link href="{% static '/css/Auth.css'%}" rel="stylesheet" />
 <div class="authForm" id="auth">
     <div class="center"><img src="/static/FinalLogo.png"></div>
@@ -17,5 +18,6 @@
     <a href="https://oauth.vk.com/access_token?client_id=7872727&client_secret=m4ba14GLwrURMZphVM1q&code=516caedefa6b8df686&redirect_uri=http://localhost:40807&response_type=code">
         <img src="{% static '/img/VK.png'%}" style="width: 50px;">
     </a>
+    {%  get_providers as socialaccount_providers %}
 </div>                                                                                               
 {% endblock content %}

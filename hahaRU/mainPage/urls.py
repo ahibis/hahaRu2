@@ -1,5 +1,4 @@
-from django.urls import path
-
+from django.urls import path, include
 from .views import *
 
 urlpatterns = [
@@ -14,5 +13,5 @@ urlpatterns = [
     path('Auth', Auth.as_view()),
     path('Registration', Registration.as_view()),
     path('User', User.as_view()),
-    path('User/<int:id>', UserId.as_view())
+    path('User/<int:id>', UserId.as_view()),
 ]
