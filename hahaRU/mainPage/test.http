@@ -8,9 +8,13 @@ type=anecdot&offset=3
 POST http://127.0.0.1:8000/api/getPosts
 content-type: application/x-www-form-urlencoded
 
-userId=1
+userId=9
 ###
+POST http://127.0.0.1:8000/api/getPosts
+content-type: application/x-www-form-urlencoded
 
+order=popular&search=ор
+###
 POST  http://127.0.0.1:8000/api/getUser
 content-type: application/x-www-form-urlencoded
 
