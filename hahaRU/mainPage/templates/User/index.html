@@ -65,7 +65,7 @@
     </div>
     <div class="block between" v-for="post in Posts">
       <div>
-        <a href="{% static '/User'%}">
+        <a :href="`/User/${post.userId}`">
           <img :src="AvatarSrc" class="ava" />
         </a>
       </div>

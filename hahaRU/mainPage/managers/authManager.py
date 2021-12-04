@@ -38,7 +38,7 @@ def Login(request):
         if not len(users):
             raise BadRequest("Нет пользователя с таким логином!")
         user = users[0]
-        if not bcrypt.checkpw(password.encode('utf-8'), user.Password.encode('utf-8')):
+        if not bcrypt.checkpw(password.encode('utf-8'), user["Password"].encode('utf-8')):
             raise BadRequest("Пароль не верен!")
         check(user)
         request.session["id"]= user.id

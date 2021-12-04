@@ -79,17 +79,29 @@ def getContents(data):
         objs = objsToJSON(Anecdot.objects.order_by("-likesCount").all()[offset:offset+count])
     return {"status":"ok","data":objs}
 
+
 def getPosts(data):
+    orders={
+        "new":"-id",
+        "old":"id",
+        "unpopular":"likesCount"
+    }
     count = 20
     offset = 0
-    keys = data.keys()
-    if "count" in keys:
+    if "count" in data:
         count = int(data["count"])
-    if "offset" in keys:
+    if "offset" in data:
         offset = int(data["offset"])
     objs = []
-    if not "userId" in keys:
-        objs = objsToJSON(Post.objects.order_by("-likesCount").all()[offset:offset+count])
+    order = "-likesCount"
+    if "order" in data:
+        if data["order"] in orders:
+            order = orders[data["order"]]
+    search=""
+    if "search" in data:
+        search = data["search"]
+    if not "userId" in data:
+        objs = objsToJSON(Post.objects.filter(text__contains=search).order_by(order).all()[offset:offset+count])
     else:
         objs = objsToJSON(Post.objects.filter(userId=data["userId"]).order_by("-id").all()[offset:offset+count])
     return {"status":"ok","data":objs}

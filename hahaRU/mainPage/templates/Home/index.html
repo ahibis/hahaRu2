@@ -5,6 +5,13 @@
 
 <div id="app">
     <div class="intro">Топ анекдотов за всё время</div>
+    <div>сортировать по
+        <select @change="changeOrder">
+            <option v-for="order,i in orders" :value="i">[[order]]</option>
+        </select>
+        поиск
+        <input placeholder="поиск" v-model="search">
+    </div>
     <div class="block between" v-for="post in Posts">
         <div>
             <a :href="`/User/${post.userId}`">
