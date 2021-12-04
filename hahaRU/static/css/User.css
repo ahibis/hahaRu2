@@ -1,85 +1,115 @@
-﻿#info {
-    width: 868px;
-    padding:0px 58px;
-    padding-top:44px;
-}
-.avaMain {
-    width: 177px;
-    height: 177px;
-}
-.name {
-    font-size: 24px;
-    line-height: 18px;
-}
-.date {
-    font-size: 14px;
-    line-height: 18px;
-}
-.joke{
-    width: 752px;
-    height: 120px;
-    border: 1px solid #797979;
-    box-sizing: border-box;
-    border-radius: 15px;
-}
-.avaMain{
-    border-radius:50%;
-}
-.url img {
-    width: 54px;
-}
-.url div {
-    font-size: 14px;
-    line-height: 18px;
-    letter-spacing: 0.2px;
-    color: rgba(55, 63, 65, 0.61);
-    padding-top:20px;
-}
-main{
-    margin-top:68px;
-}
-input {
-    border: none;
-    background: none;
-    display: block;
-    font-family: 'Montserrat', sans-serif
-}
-input:hover{
-    border:none
-}
-textarea::hover{
-    border:none;
-}
-textarea {
-    display: block;
-    text-decoration: none;
-    background: none;
-    border: none;
-    resize: none;
-    font-family: 'Montserrat', sans-serif
-}
-.inputPost {
-    width: 1057px;
-    min-height: 157px;
-    border: 1px solid #797979;
-    box-sizing: border-box;
-    border-radius: 15px;
-    padding:6px;
-}
-.camera {
-    width: 25px;
-    height: 25px;
-}
-.postSend {
-    width: 92px;
-    height: 25px;
-    background: #959595;
-    border-radius: 15px;
-    border:none;
-    margin-left:15px;
-}
-.inpWrap {
-    padding: 10px;
-    margin-top: 45px;
+#info {
+  width: 60.2777777778vw;
+  padding: 0vw 4.0277777778vw;
+  padding-top: 3.0555555556vw;
 }
 
+.avaMain {
+  width: 12.2916666667vw;
+  height: 12.2916666667vw;
+}
+
+.name {
+  font-size: 1.6666666667vw;
+  line-height: 1.25vw;
+}
+
+.date {
+  font-size: 0.9722222222vw;
+  line-height: 1.25vw;
+}
+
+.joke {
+  width: 52.2222222222vw;
+  height: 8.3333333333vw;
+  border: 0.0694444444vw solid #797979;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 1.0416666667vw;
+}
+
+.avaMain {
+  border-radius: 50%;
+}
+
+.url img {
+  width: 3.75vw;
+}
+
+.url div {
+  font-size: 0.9722222222vw;
+  line-height: 1.25vw;
+  letter-spacing: 0.0138888889vw;
+  color: rgba(55, 63, 65, 0.61);
+  padding-top: 1.3888888889vw;
+}
+
+main {
+  margin-top: 4.7222222222vw;
+}
+
+input {
+  border: none;
+  background: none;
+  display: block;
+  font-family: "Montserrat", sans-serif;
+}
+
+input:hover {
+  border: none;
+}
+
+textarea::hover {
+  border: none;
+}
+
+textarea {
+  display: block;
+  text-decoration: none;
+  background: none;
+  border: none;
+  resize: none;
+  font-family: "Montserrat", sans-serif;
+}
+
+.inputPost {
+  width: 73.4027777778vw;
+  min-height: 10.9027777778vw;
+  border: 0.0694444444vw solid #797979;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 1.0416666667vw;
+  padding: 0.4166666667vw;
+}
+
+.camera {
+  width: 1.7361111111vw;
+  height: 1.7361111111vw;
+}
+
+.postSend {
+  width: 6.3888888889vw;
+  height: 1.7361111111vw;
+  background: #959595;
+  border-radius: 1.0416666667vw;
+  border: none;
+  margin-left: 1.0416666667vw;
+}
+
+.inpWrap {
+  padding: 0.6944444444vw;
+  margin-top: 3.125vw;
+}
+
+.dislike {
+  margin-left: 2.7777777778vw;
+}
+
+.like, .dislike {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}

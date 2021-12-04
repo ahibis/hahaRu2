@@ -1,13 +1,14 @@
-﻿.published {
-    margin-bottom: 10px;
-    margin-left: 980px;
-    float: left;
+.published {
+  margin-bottom: 0.6944444444vw;
+  margin-left: 68.0555555556vw;
+  float: left;
 }
+
 .anekdot1 {
-    width: 918px;
-    min-height: 133px;
-    font-size: 14px;
-    line-height: 18px;
-    margin-top: 10px;
-    margin-left: 16px;
+  width: 63.75vw;
+  min-height: 9.2361111111vw;
+  font-size: 0.9722222222vw;
+  line-height: 1.25vw;
+  margin-top: 0.6944444444vw;
+  margin-left: 1.1111111111vw;
 }

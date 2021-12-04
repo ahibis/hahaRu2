@@ -73,7 +73,7 @@
         <div class="name">[[Login]]</div>
         <div class="date">[[post.date.replaceAll("-",".")]]</div>
         <div class="anekdot">[[post.text]]</div>
-        <div class="between">
+        <div class="right">
           <div class="like" v-on:click="changeLike(post.id)" :id="post.id">
             [[post.likesCount]]<img
               src="{% static '/img/Like 1.png'%}"

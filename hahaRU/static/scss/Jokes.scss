@@ -1,0 +1,17 @@
+﻿$template_width:1440;
+@function vw($n) {
+  @return $n * 100vw / $template_width;
+}
+.published {
+    margin-bottom: vw(10);
+    margin-left: vw(980);
+    float: left;
+}
+.anekdot1 {
+    width: vw(918);
+    min-height: vw(133);
+    font-size: vw(14);
+    line-height: vw(18);
+    margin-top: vw(10);
+    margin-left: vw(16);
+}

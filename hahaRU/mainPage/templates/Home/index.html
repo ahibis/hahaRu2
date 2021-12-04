@@ -5,7 +5,8 @@
 
 <div id="app">
     <div class="intro">Топ анекдотов за всё время</div>
-    <div>сортировать по
+    <div class="filter">
+        сортировать по
         <select @change="changeOrder">
             <option v-for="order,i in orders" :value="i">[[order]]</option>
         </select>
@@ -22,7 +23,7 @@
             <div class="name">[[Users[post.userId].Login]]</div>
             <div class="date">[[post.date.replaceAll("-",".")]]</div>
             <div class="anekdot">[[post.text]]</div>
-            <div class="between">
+            <div class="right">
                 <div class="like" v-on:click="changeLike(post.id)">[[post.likesCount]]<img
                         src="{% static '/img/Like 1.png'%}" class="like1"></div>
                 <div class="dislike" v-on:click="changeDisLike(post.id)">[[post.disLikesCount]]<img
