@@ -44,7 +44,10 @@
             {% block content %}{% endblock content %}
         </main>
     </div>
-
+    <div class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+        <strong id="message"></strong>
+    </div>
     <script src="{% static '/lib/bootstrap/dist/js/bootstrap.bundle.min.js'%}"></script>
     <script src="{% static '/js/site.js'%}" asp-append-version="true"></script>
 </body>

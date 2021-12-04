@@ -23,13 +23,19 @@
 }
 
 .block {
-    width: 1080px;
+    /*width: 1080px;*/
+    /*padding: 0px 19px;*/
+    /*padding-top: 19px;*/
+    /*margin-top: 30px;*/
+    width: 70vw;
     background: white;
     min-height: 177px;
     border-radius: 15px;
-    padding: 0px 19px;
-    padding-top: 19px;
-    margin-top: 30px;
+    padding: 0vw 0.990vw;
+    padding-top: 0.990vw;
+    margin-top: 1.563vw;
+    margin-left: auto;
+    margin-right: auto;
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.25);
 }
 
@@ -40,8 +46,9 @@
 }
 
 .inner {
-    width: 996px;
+
     margin-left: 16px;
+    margin-right: 16px;
 }
 
 .name {
@@ -76,12 +83,17 @@
 
 .like1 {
     margin-top: 0px;
-    margin-left: 829px;
+    /*margin-left: 51vw;*/
     float: left;
 }
 
 .dislike1 {
     margin-top: 0px;
-    margin-left: 61px;
+    margin-left: auto;
     float: left;
+}
+
+.like {
+    /*display: flex;
+    align-items: center;*/
 }
