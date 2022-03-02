@@ -8,8 +8,9 @@ from django.core.files.storage import FileSystemStorage
 import uuid
 from ..moduls.IdList import IdList
 from django.http.response import JsonResponse
-from base64 import decodestring
+from base64 import decode
 from django.core.files.base import ContentFile
+import base64
 
 def objToJSON(data):
     json=data.__dict__
@@ -186,7 +187,7 @@ def saveMem(data):
     count = Mem.objects.count();
     path = f"/static/img/memGenerated/img{count}.png"
     with open("hahaRU"+path, "wb") as fs:
-        fs.write(decodestring(str.encode(data["imgBase64"])))
+        fs.write(decode(str.encode(data["imgBase64"])))
     mem = Mem(imgSrc = path)
     mem.save();
     return {"status" : "ok", "value" : objToJSON(mem)}

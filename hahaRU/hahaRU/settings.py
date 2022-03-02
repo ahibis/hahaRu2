@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'hahaRU.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': 's220246_hahaBase',
+        'USER': 's220246_admin',
+        'PASSWORD': 's220246_MyBaseMyBase',
+        'HOST': '81.90.180.252',   # Or an IP Address that your DB is hosted on
+        'PORT': '3306',
     }
 }
 
